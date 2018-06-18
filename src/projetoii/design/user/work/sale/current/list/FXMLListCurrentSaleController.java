@@ -5,6 +5,7 @@
  */
 package projetoii.design.user.work.sale.current.list;
 
+import dao.Produtovenda;
 import dao.Venda;
 import helpers.ProdutoBLL;
 import helpers.VendaBLL;
@@ -35,11 +36,11 @@ public class FXMLListCurrentSaleController implements Initializable {
     
     /* Variables used for setting up the table content */
     @FXML public TableView<VendaBLL> saleTable;
-    @FXML private TableColumn<ProdutoBLL, Long> barCodeColumn;
-    @FXML private TableColumn<ProdutoBLL, String> nameColumn;
-    @FXML private TableColumn<ProdutoBLL, String> sizeColumn;
-    @FXML private TableColumn<VendaBLL, Integer> quantityColumn;
-    @FXML private TableColumn<ProdutoBLL, Float> priceColumn;
+    @FXML private TableColumn<Produtovenda, Long> barCodeColumn;
+    @FXML private TableColumn<Produtovenda, String> nameColumn;
+    @FXML private TableColumn<Produtovenda, String> sizeColumn;
+    @FXML private TableColumn<Produtovenda, Integer> quantityColumn;
+    @FXML private TableColumn<Produtovenda, Float> priceColumn;
     private ObservableList<VendaBLL> saleObservableList;
     
     /* Text field used to search sales on the table, updating as it searches */
@@ -62,8 +63,8 @@ public class FXMLListCurrentSaleController implements Initializable {
         setFields();
         /* Retrieves all database sales to an arraylist and initializes the table values if it is not empty */
         List<VendaBLL> saleList = new ArrayList<>();
-        saleList = VendaService.getHelperList("FROM Venda WHERE funcionario.idfuncionario = " + FXMLUserTopMenuController.employee.getIdfuncionario() + " ORDER BY datavenda ASC");
-        
+        saleList = VendaService.getHelperList("FROM Venda WHERE funcionario.idfuncionario = " + FXMLUserTopMenuController.employee.getIdfuncionario() + " ORDER BY datavenda ASC");  
+        saleList = VendaService.getHelperList("FROM Venda WHERE funcionario.idfuncionario = " + FXMLUserTopMenuController.employee.getIdfuncionario() + " ORDER BY datavenda ASC"); 
     }   
     
     /**
@@ -73,9 +74,9 @@ public class FXMLListCurrentSaleController implements Initializable {
     private void initializeTable(List<VendaBLL> saleList)
     {
         /* Sets column variables to use entity info, empty for a button creation */
-        this.barCodeColumn.setCellValueFactory(new PropertyValueFactory<>("idmarca"));
-        this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("produto.nome"));
-        this.sizeColumn.setCellValueFactory(new PropertyValueFactory<>(""));
+        this.barCodeColumn.setCellValueFactory(new PropertyValueFactory<>("codbarras"));
+        this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        this.sizeColumn.setCellValueFactory(new PropertyValueFactory<>("tamanho.descricao"));
         this.quantityColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         this.priceColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         

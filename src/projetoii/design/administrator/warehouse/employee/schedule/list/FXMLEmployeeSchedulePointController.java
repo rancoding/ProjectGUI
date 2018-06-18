@@ -49,6 +49,11 @@ public class FXMLEmployeeSchedulePointController implements Initializable {
     
     @FXML private Button prevWeekButton;
     @FXML private Button nextWeekButton;
+    
+    private List<Date> prevList;
+    private List<Date> currentList;
+    private List<Date> nextList;
+    
     /**
      * Initializes the controller class.
      */
@@ -61,6 +66,7 @@ public class FXMLEmployeeSchedulePointController implements Initializable {
     {
         setEmployee(employee);
         initializePointList();
+        getCurrentDate();
     }
     
     private void setEmployee(FuncionarioBLL employee)
@@ -70,11 +76,18 @@ public class FXMLEmployeeSchedulePointController implements Initializable {
     
     private void initializePointList()
     {
-        pointList = PontoHorarioService.getHelperList("FROM Pontohorario WHERE idhorario = " + employee.getHorario().getIdhorario() + " AND idfuncionario = " + employee.getIdfuncionario() + " AND ");
+        pointList = PontoHorarioService.getHelperList("FROM Pontohorario WHERE idhorario = " + employee.getHorario().getIdhorario() + " AND idfuncionario = " + employee.getIdfuncionario());
         
         if(pointList.isEmpty())
         {
             pointList = new ArrayList<>();
         }
+    }
+    
+    private void getCurrentDate()
+    {
+        pointList.forEach(point -> {
+            System.out.println(point.getId().getData());
+        });
     }
 }

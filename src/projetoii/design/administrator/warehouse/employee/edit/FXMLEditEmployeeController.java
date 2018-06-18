@@ -25,8 +25,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -35,7 +33,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import javafx.util.converter.LocalTimeStringConverter;
 import projetoii.design.administrator.warehouse.employee.list.FXMLListEmployeeController;
 import services.HorarioService;
 
@@ -68,22 +65,15 @@ public class FXMLEditEmployeeController implements Initializable {
     
     private BigDecimal scheduleID;
     
-//    @FXML private Spinner firstEntranceSpinner;
-//    @FXML private Spinner firstExitSpinner;
-//    @FXML private Spinner secondEntranceSpinner;
-//    @FXML private Spinner secondExitSpinner;
-//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         /* Retrieves all database product types to an arraylist and initializes the table values if it is not empty */
         scheduleList = HorarioService.getHelperList("FROM Horario ORDER BY idhorario ASC");
         
-        //firstEntranceSpinner = new Spinner(setHourValueFactory());
-        //firstExitSpinner = new Spinner(setHourValueFactory());
-        //secondEntranceSpinner = new Spinner(setHourValueFactory());
-        //secondExitSpinner = new Spinner(setHourValueFactory());
+        genderBox.setItems(FXCollections.observableArrayList("Uniforme", "Masculino", "Feminino"));
+        typeBox.setItems(FXCollections.observableArrayList("Administrador", "Utilizador"));
+        activeBox.setItems(FXCollections.observableArrayList("Sim", "Não"));
         
         setScheduleRowFactory();
         
@@ -104,11 +94,7 @@ public class FXMLEditEmployeeController implements Initializable {
             TableRow<HorarioBLL> row = new TableRow<>();
             
             row.setOnMouseClicked((event) -> {
-                if(event.getClickCount() == 2 && (!(row.isEmpty()))) {
-//                    firstEntranceSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(row.getItem().getHoraprimeiraentrada()) ) );
-//                    firstExitSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(row.getItem().getHoraprimeirasaida()) ) );
-//                    secondEntranceSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(row.getItem().getHorasegundaentrada()) ) );
-//                    secondExitSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(row.getItem().getHorasegundasaida()) ) );
+                if((!(row.isEmpty()))) {
 
                     firstEntranceField.setText( getDateTime(row.getItem().getHoraprimeiraentrada()) );
                     firstExitField.setText( getDateTime(row.getItem().getHoraprimeirasaida()) );
@@ -122,46 +108,6 @@ public class FXMLEditEmployeeController implements Initializable {
             return row;
         });
     }
-    
-    /*private SpinnerValueFactory setHourValueFactory()
-    {
-        SpinnerValueFactory spinnerValueFactory = new SpinnerValueFactory() {
-            
-            {
-                setConverter(new LocalTimeStringConverter(formatter, null));
-            }
-            
-            @Override
-            public void decrement(int steps)
-            {
-                if(getValue() == null)
-                {
-                    setValue(LocalTime.now());
-                }
-                else
-                {
-                    LocalTime time = (LocalTime) getValue();
-                    setValue(time.minusMinutes(steps));
-                }
-            }
-
-            @Override
-            public void increment(int steps)
-            {
-                if(this.getValue() == null)
-                {
-                    setValue(LocalTime.now());
-                }
-                else
-                {
-                    LocalTime time = (LocalTime) getValue();
-                    setValue(time.plusMinutes(steps));
-                }
-            }
-        };
-                
-        return spinnerValueFactory;
-    }*/
     
     /* * Initializes variables when called from other controller * */
     public void initializeOnControllerCall(FXMLListEmployeeController listEmployeeController, ObservableList<FuncionarioBLL> employeeList, FuncionarioBLL employee)
@@ -210,18 +156,10 @@ public class FXMLEditEmployeeController implements Initializable {
             List<HorarioBLL> employeeSchedule = HorarioService.getHelperList("FROM Horario WHERE idhorario = " + employee.getHorario().getIdhorario());
             HorarioBLL schedule = employeeSchedule.get(0);
 
-//            firstEntranceSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(schedule.getHoraprimeiraentrada()) ) );
-//            firstExitSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(schedule.getHoraprimeirasaida()) ) );
-//            secondEntranceSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(schedule.getHorasegundaentrada()) ) );
-//            secondExitSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(schedule.getHorasegundasaida()) ) );
             this.firstEntranceField.setText( getDateTime(schedule.getHoraprimeiraentrada()) );
             this.firstExitField.setText( getDateTime(schedule.getHoraprimeirasaida()) );
             this.secondEntranceField.setText( getDateTime(schedule.getHorasegundaentrada()) );
             this.secondExitField.setText( getDateTime(schedule.getHorasegundasaida()) );
-//            System.out.println(firstEntranceSpinner.getValue());
-//            System.out.println(firstExitSpinner.getValue());
-//            System.out.println(secondEntranceSpinner.getValue());
-//            System.out.println(secondExitSpinner.getValue());
         }
     }
     
