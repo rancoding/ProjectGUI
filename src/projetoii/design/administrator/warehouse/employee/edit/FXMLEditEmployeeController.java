@@ -5,14 +5,14 @@
  */
 package projetoii.design.administrator.warehouse.employee.edit;
 
-import dao.Funcionario;
-import dao.Horario;
 import helpers.FuncionarioBLL;
 import helpers.HorarioBLL;
-import hibernate.HibernateUtil;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,13 +25,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import javafx.util.converter.LocalTimeStringConverter;
 import projetoii.design.administrator.warehouse.employee.list.FXMLListEmployeeController;
 import services.HorarioService;
 
@@ -62,11 +66,26 @@ public class FXMLEditEmployeeController implements Initializable {
     private ObservableList<HorarioBLL> scheduleObservableList; 
     private List<HorarioBLL> scheduleList;
     
+    private BigDecimal scheduleID;
+    
+//    @FXML private Spinner firstEntranceSpinner;
+//    @FXML private Spinner firstExitSpinner;
+//    @FXML private Spinner secondEntranceSpinner;
+//    @FXML private Spinner secondExitSpinner;
+//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         /* Retrieves all database product types to an arraylist and initializes the table values if it is not empty */
         scheduleList = HorarioService.getHelperList("FROM Horario ORDER BY idhorario ASC");
+        
+        //firstEntranceSpinner = new Spinner(setHourValueFactory());
+        //firstExitSpinner = new Spinner(setHourValueFactory());
+        //secondEntranceSpinner = new Spinner(setHourValueFactory());
+        //secondExitSpinner = new Spinner(setHourValueFactory());
+        
+        setScheduleRowFactory();
         
         if(!(scheduleList.isEmpty()))
         {
@@ -78,6 +97,71 @@ public class FXMLEditEmployeeController implements Initializable {
             initializeTable(scheduleList);
         }
     }    
+    
+    private void setScheduleRowFactory()
+    {
+        scheduleTable.setRowFactory((schedule) -> {
+            TableRow<HorarioBLL> row = new TableRow<>();
+            
+            row.setOnMouseClicked((event) -> {
+                if(event.getClickCount() == 2 && (!(row.isEmpty()))) {
+//                    firstEntranceSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(row.getItem().getHoraprimeiraentrada()) ) );
+//                    firstExitSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(row.getItem().getHoraprimeirasaida()) ) );
+//                    secondEntranceSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(row.getItem().getHorasegundaentrada()) ) );
+//                    secondExitSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(row.getItem().getHorasegundasaida()) ) );
+
+                    firstEntranceField.setText( getDateTime(row.getItem().getHoraprimeiraentrada()) );
+                    firstExitField.setText( getDateTime(row.getItem().getHoraprimeirasaida()) );
+                    secondEntranceField.setText( getDateTime(row.getItem().getHorasegundaentrada()) );
+                    secondExitField.setText( getDateTime(row.getItem().getHorasegundasaida()) );
+                    
+                    scheduleID = row.getItem().getIdhorario();
+                }
+            });
+            
+            return row;
+        });
+    }
+    
+    /*private SpinnerValueFactory setHourValueFactory()
+    {
+        SpinnerValueFactory spinnerValueFactory = new SpinnerValueFactory() {
+            
+            {
+                setConverter(new LocalTimeStringConverter(formatter, null));
+            }
+            
+            @Override
+            public void decrement(int steps)
+            {
+                if(getValue() == null)
+                {
+                    setValue(LocalTime.now());
+                }
+                else
+                {
+                    LocalTime time = (LocalTime) getValue();
+                    setValue(time.minusMinutes(steps));
+                }
+            }
+
+            @Override
+            public void increment(int steps)
+            {
+                if(this.getValue() == null)
+                {
+                    setValue(LocalTime.now());
+                }
+                else
+                {
+                    LocalTime time = (LocalTime) getValue();
+                    setValue(time.plusMinutes(steps));
+                }
+            }
+        };
+                
+        return spinnerValueFactory;
+    }*/
     
     /* * Initializes variables when called from other controller * */
     public void initializeOnControllerCall(FXMLListEmployeeController listEmployeeController, ObservableList<FuncionarioBLL> employeeList, FuncionarioBLL employee)
@@ -126,11 +210,26 @@ public class FXMLEditEmployeeController implements Initializable {
             List<HorarioBLL> employeeSchedule = HorarioService.getHelperList("FROM Horario WHERE idhorario = " + employee.getHorario().getIdhorario());
             HorarioBLL schedule = employeeSchedule.get(0);
 
-            firstEntranceField.setText( getDateTime(schedule.getHoraprimeiraentrada()) );
-            firstExitField.setText( getDateTime(schedule.getHoraprimeirasaida()) );
-            secondEntranceField.setText( getDateTime(schedule.getHorasegundaentrada()) );
-            secondExitField.setText( getDateTime(schedule.getHorasegundasaida()) );
+//            firstEntranceSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(schedule.getHoraprimeiraentrada()) ) );
+//            firstExitSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(schedule.getHoraprimeirasaida()) ) );
+//            secondEntranceSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(schedule.getHorasegundaentrada()) ) );
+//            secondExitSpinner.getValueFactory().setValue( getLocalTimeFromDate( getDateLocalTime(schedule.getHorasegundasaida()) ) );
+            this.firstEntranceField.setText( getDateTime(schedule.getHoraprimeiraentrada()) );
+            this.firstExitField.setText( getDateTime(schedule.getHoraprimeirasaida()) );
+            this.secondEntranceField.setText( getDateTime(schedule.getHorasegundaentrada()) );
+            this.secondExitField.setText( getDateTime(schedule.getHorasegundasaida()) );
+//            System.out.println(firstEntranceSpinner.getValue());
+//            System.out.println(firstExitSpinner.getValue());
+//            System.out.println(secondEntranceSpinner.getValue());
+//            System.out.println(secondExitSpinner.getValue());
         }
+    }
+    
+    private LocalTime getLocalTimeFromDate(String date)
+    {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalTime time = LocalTime.parse(date, dateTimeFormatter);
+        return time;
     }
     
     /* * Converts the employee date to a local date * */
@@ -139,6 +238,20 @@ public class FXMLEditEmployeeController implements Initializable {
         LocalDate localDate = LocalDate.parse(date.toString());
         // LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return localDate;
+    }
+    
+    /* * Returns the local time of a given date * */
+    private String getDateLocalTime(Date date)
+    {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return simpleDateFormat.format(date);
+    }
+    
+    /* * Returns the hour and minutes of a given date * */
+    private String getDateTime(Date date)
+    {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        return simpleDateFormat.format(date);
     }
     
     /* * Gets the gender full name (Male, Female, Undefined) depending on the given character * */
@@ -195,13 +308,6 @@ public class FXMLEditEmployeeController implements Initializable {
         {
             return "Utilizador";
         }
-    }
-    
-    /* * Returns the hour and minutes of a given date * */
-    private String getDateTime(Date date)
-    {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-        return simpleDateFormat.format(date);
     }
     
     /** Initializes all table content for the first time **/

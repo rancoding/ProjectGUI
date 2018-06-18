@@ -1,17 +1,237 @@
-#accountBtn
+#loginBtn1
 {
     -fx-background-color: #E9E9E9;
     -fx-background-radius: 0em;
 }
 
-#accountBtn:hover
+#loginBtn1:hover
 {
     -fx-background-color: #EFEFEF;
     -fx-border-width: 3 3 3 3;
     -fx-border-color: #039ed3;
 }
 
-#accountBtn:pressed
+#loginBtn1:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn2
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn2:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn2:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn3
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn3:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn3:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn4
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn4:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn4:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn5
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn5:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn5:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn6
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn6:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn6:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn7
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn7:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn7:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn8
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn8:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn8:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn9
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn9:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn9:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn10
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn10:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn10:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn11
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn11:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn11:pressed
+{
+    -fx-background-color: #F7F7F7;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn12
+{
+    -fx-background-color: #E9E9E9;
+    -fx-background-radius: 0em;
+}
+
+#loginBtn12:hover
+{
+    -fx-background-color: #EFEFEF;
+    -fx-border-width: 3 3 3 3;
+    -fx-border-color: #039ed3;
+}
+
+#loginBtn12:pressed
 {
     -fx-background-color: #F7F7F7;
     -fx-border-width: 3 3 3 3;

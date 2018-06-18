@@ -258,7 +258,7 @@ public class FXMLListEmployeeController implements Initializable {
             Parent root = (Parent) loader.load();
             
             FXMLEmployeeSchedulePointController scheduleController = (FXMLEmployeeSchedulePointController) loader.getController();
-            //scheduleController.initializeOnControllerCall(this, employeeObservableList, type);
+            scheduleController.initializeOnControllerCall(employee);
             
             Stage stage = new Stage();
             stage.setTitle(title);
@@ -267,7 +267,8 @@ public class FXMLListEmployeeController implements Initializable {
         }
         catch(Exception e)
         {
-            System.out.println(message);
+            e.printStackTrace();
+            //System.out.println(message);
         }
     }
     

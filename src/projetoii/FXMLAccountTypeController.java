@@ -89,6 +89,7 @@ public class FXMLAccountTypeController implements Initializable {
         }
         catch (IOException ex)
         {
+            ex.printStackTrace();
             System.out.println("Não foi possível abrir o ficheiro " + file);
         }
     }

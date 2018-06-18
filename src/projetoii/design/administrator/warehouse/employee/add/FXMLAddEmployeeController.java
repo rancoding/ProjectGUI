@@ -6,7 +6,6 @@
 package projetoii.design.administrator.warehouse.employee.add;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

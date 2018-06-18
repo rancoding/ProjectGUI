@@ -7,28 +7,28 @@
 
 <AnchorPane id="AnchorPane" prefHeight="390.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetoii.design.user.work.login.FXMLLoginController">
     <children>
-      <Button id="accountBtn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" text="RAFAEL MORAIS" />
-      <Button id="accountBtn" layoutX="170.0" layoutY="60.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" text="GUSTAVO VIEIRA" />
-      <Button id="accountBtn" layoutX="330.0" layoutY="60.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
-      <Button id="accountBtn" layoutX="490.0" layoutY="60.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
-      <Button id="accountBtn" layoutX="10.0" layoutY="150.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
-      <Button id="accountBtn" layoutX="170.0" layoutY="150.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
-      <Button id="accountBtn" layoutX="330.0" layoutY="150.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
-      <Button id="accountBtn" layoutX="490.0" layoutY="150.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
-      <Button id="accountBtn" layoutX="10.0" layoutY="240.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
-      <Button id="accountBtn" layoutX="170.0" layoutY="240.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
-      <Button id="accountBtn" layoutX="330.0" layoutY="240.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
-      <Button id="accountBtn" layoutX="490.0" layoutY="240.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn1" fx:id="loginBtn1" disable="true" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn2" fx:id="loginBtn2" disable="true" layoutX="170.0" layoutY="60.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn3" fx:id="loginBtn3" disable="true" layoutX="330.0" layoutY="60.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn4" fx:id="loginBtn4" disable="true" layoutX="490.0" layoutY="60.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn5" fx:id="loginBtn5" disable="true" layoutX="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn6" fx:id="loginBtn6" disable="true" layoutX="170.0" layoutY="150.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn7" fx:id="loginBtn7" disable="true" layoutX="330.0" layoutY="150.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn8" fx:id="loginBtn8" disable="true" layoutX="490.0" layoutY="150.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn9" fx:id="loginBtn9" disable="true" layoutX="10.0" layoutY="240.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn10" fx:id="loginBtn10" disable="true" layoutX="170.0" layoutY="240.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn11" fx:id="loginBtn11" disable="true" layoutX="330.0" layoutY="240.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
+      <Button id="loginBtn12" fx:id="loginBtn12" disable="true" layoutX="490.0" layoutY="240.0" mnemonicParsing="false" onAction="#onAccountButtonClick" prefHeight="80.0" prefWidth="150.0" stylesheets="@css/button/loginButton.css" />
       <Pane layoutY="330.0" prefHeight="60.0" prefWidth="650.0" style="-fx-background-color: #e2e2e2;">
          <children>
-            <Button disable="true" layoutX="10.0" layoutY="18.0" mnemonicParsing="false" text="&lt;" />
-            <Button disable="true" layoutX="616.0" layoutY="18.0" mnemonicParsing="false" text="&gt;" />
+            <Button fx:id="prevButton" disable="true" layoutX="10.0" layoutY="18.0" mnemonicParsing="false" onAction="#clickPrevButton" text="&lt;" />
+            <Button fx:id="nextButton" disable="true" layoutX="616.0" layoutY="18.0" mnemonicParsing="false" onAction="#clickNextButton" text="&gt;" />
          </children>
       </Pane>
       <Pane prefHeight="50.0" prefWidth="650.0" style="-fx-background-color: #39393c;">
          <children>
             <ComboBox layoutX="584.0" layoutY="13.0" prefWidth="60.0" promptText="PT" />
-            <ComboBox fx:id="workLocationComboBox" layoutX="10.0" layoutY="13.0" prefWidth="150.0" />
+            <ComboBox fx:id="workLocationComboBox" layoutX="10.0" layoutY="13.0" onAction="#getNewEmployeeList" prefWidth="150.0" />
          </children>
       </Pane>
    </children>
