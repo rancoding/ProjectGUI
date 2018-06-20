@@ -333,7 +333,7 @@ public class FXMLAddProductController implements Initializable {
         FXMLLoader loader = new FXMLLoader(FXMLAddBrandController.class.getResource("FXMLAddBrand.fxml"));
         Parent root = (Parent) loader.load();
         FXMLAddBrandController addController = (FXMLAddBrandController) loader.getController();
-        //addController.initializeOnAddProductControllerCall(this,marcaObservableList);
+        addController.initializeOnAddProductControllerCall(this,marcaObservableList);
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();

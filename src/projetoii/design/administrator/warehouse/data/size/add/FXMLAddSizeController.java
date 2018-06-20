@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 import projetoii.design.administrator.warehouse.data.product.add.FXMLAddProductController;
+import projetoii.design.administrator.warehouse.data.product.edit.FXMLEditProductController;
 import projetoii.design.administrator.warehouse.data.size.list.FXMLListSizeController;
 import services.TamanhoService;
 
@@ -25,6 +26,7 @@ public class FXMLAddSizeController implements Initializable {
     @FXML private Label errorLabel;
     
     private FXMLAddProductController addProductController;
+    private FXMLEditProductController editProductController;
     private FXMLListSizeController listSizeController;
     private ObservableList<TamanhoBLL> sizeList;
     
@@ -57,9 +59,23 @@ public class FXMLAddSizeController implements Initializable {
     
     /**
      * Initializes all variables when getting called from another controller
-     * @param listSizeController controller who called this controller
+     * @param editProductController controller who called this controller
      * @param sizeList all sizes
      */
+    public void initializeOnEditProductControllerCall(FXMLEditProductController editProductController, ObservableList<TamanhoBLL> sizeList)
+    {
+        setListEditProductController(editProductController);
+        setObservableList(sizeList);
+    }
+    
+    /* * Sets list controller * */
+    private void setListEditProductController(FXMLEditProductController editProductController)
+    {
+        this.editProductController = editProductController;
+    }
+    
+    
+    /* * Initializes all variables when getting called from another controller * */
     public void initializeOnControllerCall(FXMLListSizeController listSizeController, ObservableList<TamanhoBLL> sizeList)
     {
         setListController(listSizeController);
@@ -103,6 +119,10 @@ public class FXMLAddSizeController implements Initializable {
         else if(this.addProductController != null)
         {
             this.addProductController.sizeComboBox.getSelectionModel().select(sizeList.size()-1);
+        }
+        else if(this.editProductController != null)
+        {
+            this.editProductController.sizeComboBox.getSelectionModel().select(sizeList.size()-1);
         }
         closeStage(event);
     }

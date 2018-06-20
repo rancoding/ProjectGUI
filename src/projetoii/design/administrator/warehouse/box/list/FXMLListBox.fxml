@@ -13,41 +13,35 @@
     <children>
       <Pane prefHeight="40.0" prefWidth="706.0">
          <children>
-            <TextField layoutX="10.0" layoutY="8.0" prefWidth="200.0" promptText="Pesquisar" />
+            <TextField fx:id="searchBoxTextField" layoutX="10.0" layoutY="8.0" onKeyReleased="#getSearchList" prefWidth="200.0" promptText="Pesquisar" />
             <Button layoutX="672.0" layoutY="8.0" mnemonicParsing="false" text="+" />
          </children>
       </Pane>
-      <TableView layoutX="10.0" layoutY="40.0" prefHeight="240.0" prefWidth="686.0">
-         <columns>
-            <TableColumn editable="false" prefWidth="50.0" text="#" />
-            <TableColumn editable="false" prefWidth="186.0" text="Código de Barras" />
-            <TableColumn editable="false" prefWidth="186.0" text="Produto" />
-            <TableColumn editable="false" prefWidth="100.0" text="Quantidade" />
-            <TableColumn editable="false" prefWidth="50.0" sortable="false">
+      <TableView fx:id="boxTable" layoutX="10.0" layoutY="40.0" prefHeight="241.0" prefWidth="686.0">
+        <columns>
+          <TableColumn fx:id="boxNumberColumn" prefWidth="75.0" text="Caixa" />
+          <TableColumn fx:id="barCodeColumn" prefWidth="160.0" text="Código de Barras" />
+            <TableColumn fx:id="nameColumn" prefWidth="292.0" text="Produto" />
+            <TableColumn fx:id="quantityColumn" prefWidth="97.0" text="Quantidade" />
+            <TableColumn fx:id="editColumn" prefWidth="34.0">
                <graphic>
-                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/edit.png" />
-                     </image></ImageView>
+                     </image>
+                  </ImageView>
                </graphic>
             </TableColumn>
-            <TableColumn editable="false" prefWidth="50.0" sortable="false">
+            <TableColumn fx:id="deleteColumn" prefWidth="27.0">
                <graphic>
-                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/delete-button.png" />
-                     </image></ImageView>
+                     </image>
+                  </ImageView>
                </graphic>
             </TableColumn>
-            <TableColumn editable="false" prefWidth="50.0" sortable="false">
-               <graphic>
-                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@image/detail.png" />
-                     </image></ImageView>
-               </graphic>
-            </TableColumn>
-         </columns>
+        </columns>
       </TableView>
    </children>
 </AnchorPane>

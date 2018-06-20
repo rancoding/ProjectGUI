@@ -5,6 +5,10 @@
  */
 package projetoii.design.administrator.warehouse.data.product.edit;
 
+import dao.Cor;
+import dao.Marca;
+import dao.Tamanho;
+import dao.Tipoproduto;
 import helpers.CorBLL;
 import helpers.MarcaBLL;
 import helpers.ProdutoBLL;
@@ -19,14 +23,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import org.apache.commons.lang3.text.WordUtils;
+import projetoii.design.administrator.warehouse.data.brand.add.FXMLAddBrandController;
+import projetoii.design.administrator.warehouse.data.category.add.FXMLAddCategoryController;
+import projetoii.design.administrator.warehouse.data.color.add.FXMLAddColorController;
 import projetoii.design.administrator.warehouse.data.product.list.FXMLListProductController;
+import projetoii.design.administrator.warehouse.data.size.add.FXMLAddSizeController;
 import services.CorService;
 import services.MarcaService;
 import services.TamanhoService;
@@ -41,11 +53,11 @@ public class FXMLEditProductController implements Initializable {
 
     @FXML private TextField barCodeText;
     @FXML private TextField nameText;
-    @FXML private ComboBox brandComboBox;
-    @FXML private ComboBox typeComboBox;
-    @FXML private ComboBox sizeComboBox;
-    @FXML private ComboBox genderComboBox;
-    @FXML private ComboBox colorComboBox;
+    @FXML public ComboBox brandComboBox;
+    @FXML public ComboBox typeComboBox;
+    @FXML public ComboBox sizeComboBox;
+    @FXML public ComboBox genderComboBox;
+    @FXML public ComboBox colorComboBox;
     @FXML private TextField buyPriceText;
     @FXML private TextField sellPriceText;
     @FXML private Button updateButton;
@@ -122,7 +134,25 @@ public class FXMLEditProductController implements Initializable {
   ///////////////////////////// Fill Combo Boxes ///////////////////////////////
     
     public void fillBrandComboBox(){
-        brandComboBox.getItems().addAll(this.marcaObservableList);
+        List<MarcaBLL> marcaList = MarcaService.getHelperList("FROM Marca ORDER BY idmarca ASC");
+        this.marcaObservableList = FXCollections.observableArrayList(marcaList);
+
+        brandComboBox.setItems(this.marcaObservableList); 
+        
+      
+        brandComboBox.setConverter(new StringConverter<Marca>()
+        {
+                    @Override
+                    public String toString(Marca object) {
+                        return object.getNome();
+                    }
+
+                    @Override
+                    public Marca fromString(String string) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+        });    
+        //brandComboBox.getItems().addAll(this.marcaObservableList);
     }
          
     public void fillTypeProductComboBox()
@@ -131,6 +161,18 @@ public class FXMLEditProductController implements Initializable {
         this.tipoProdutoObservableList = FXCollections.observableArrayList(tipoProdutoList);
 
         typeComboBox.setItems(this.tipoProdutoObservableList);
+        typeComboBox.setConverter(new StringConverter<Tipoproduto>()
+        {
+                    @Override
+                    public String toString(Tipoproduto object) {
+                        return object.getNome();
+                    }
+
+                    @Override
+                    public Tipoproduto fromString(String string) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+        });    
     }
     
     public void fillSizeComboBox()
@@ -139,6 +181,18 @@ public class FXMLEditProductController implements Initializable {
         this.tamanhoObservableList = FXCollections.observableArrayList(tamanhoList);
 
         sizeComboBox.setItems(this.tamanhoObservableList);
+        sizeComboBox.setConverter(new StringConverter<Tamanho>()
+        {
+                    @Override
+                    public String toString(Tamanho object) {
+                        return object.getDescricao();
+                    }
+
+                    @Override
+                    public Tamanho fromString(String string) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+        });  
     }
     
     public void fillGenderComboBox()
@@ -161,6 +215,18 @@ public class FXMLEditProductController implements Initializable {
         this.corObservableList = FXCollections.observableArrayList(corList);
 
         colorComboBox.setItems(this.corObservableList);
+        colorComboBox.setConverter(new StringConverter<Cor>()
+        {
+                    @Override
+                    public String toString(Cor object) {
+                        return object.getNome();
+                    }
+
+                    @Override
+                    public Cor fromString(String string) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+        });  
     }
     
     ////////////////////////////////////////////////////////////////////////////
@@ -206,11 +272,11 @@ public class FXMLEditProductController implements Initializable {
     {
         product.setCodbarras(Long.parseLong(barCodeText.getText()));
         product.setDescricao(WordUtils.capitalizeFully(nameText.getText()));
-        product.setMarca((MarcaBLL) brandComboBox.getSelectionModel().getSelectedItem());
-        product.setTamanho((TamanhoBLL) sizeComboBox.getSelectionModel().getSelectedItem());
-        product.setTipoproduto((TipoProdutoBLL) typeComboBox.getSelectionModel().getSelectedItem());
+        product.setMarca((Marca) brandComboBox.getSelectionModel().getSelectedItem());
+        product.setTamanho((Tamanho) sizeComboBox.getSelectionModel().getSelectedItem());
+        product.setTipoproduto((Tipoproduto) typeComboBox.getSelectionModel().getSelectedItem());
         product.setGenero(getComboBoxGender(genderComboBox.getSelectionModel().getSelectedIndex()));
-        product.setCor((CorBLL) colorComboBox.getSelectionModel().getSelectedItem());
+        product.setCor((Cor) colorComboBox.getSelectionModel().getSelectedItem());
         product.setPrecocompra(Double.parseDouble(buyPriceText.getText()));
         product.setPrecovenda(Double.parseDouble(sellPriceText.getText()));
         
@@ -230,21 +296,21 @@ public class FXMLEditProductController implements Initializable {
                }
            }    
         }
-        if(!(product.getTipoproduto()==((TipoProdutoBLL) typeComboBox.getSelectionModel().getSelectedItem()))){
-            product.setTipoproduto((TipoProdutoBLL) typeComboBox.getSelectionModel().getSelectedItem());
+        if(!(product.getTipoproduto()==((Tipoproduto) typeComboBox.getSelectionModel().getSelectedItem()))){
+            product.setTipoproduto((Tipoproduto) typeComboBox.getSelectionModel().getSelectedItem());
         }
         if(!(product.getGenero()==(getComboBoxGender(genderComboBox.getSelectionModel().getSelectedIndex())))){
             product.setGenero(getComboBoxGender(genderComboBox.getSelectionModel().getSelectedIndex()));
         } else {
         }
-        if(!(product.getMarca()==((MarcaBLL) brandComboBox.getSelectionModel().getSelectedItem()))){
-            product.setMarca((MarcaBLL) brandComboBox.getSelectionModel().getSelectedItem());
+        if(!(product.getMarca()==((Marca) brandComboBox.getSelectionModel().getSelectedItem()))){
+            product.setMarca((Marca) brandComboBox.getSelectionModel().getSelectedItem());
         }
-        if(!(product.getCor()==((CorBLL) colorComboBox.getSelectionModel().getSelectedItem()))){
-            product.setCor((CorBLL) colorComboBox.getSelectionModel().getSelectedItem());
+        if(!(product.getCor()==((Cor) colorComboBox.getSelectionModel().getSelectedItem()))){
+            product.setCor((Cor) colorComboBox.getSelectionModel().getSelectedItem());
         }
-        if(!(product.getTamanho()==((TamanhoBLL) sizeComboBox.getSelectionModel().getSelectedItem()))){
-            product.setTamanho((TamanhoBLL) sizeComboBox.getSelectionModel().getSelectedItem());
+        if(!(product.getTamanho()==((Tamanho) sizeComboBox.getSelectionModel().getSelectedItem()))){
+            product.setTamanho((Tamanho) sizeComboBox.getSelectionModel().getSelectedItem());
         }
         if(!(product.getPrecocompra()==(Double.parseDouble(buyPriceText.getText())))){
             product.setPrecocompra(Double.parseDouble(buyPriceText.getText()));
@@ -257,6 +323,55 @@ public class FXMLEditProductController implements Initializable {
         
     
     }
+    
+    @FXML
+    private void changetoAddBrand(ActionEvent event) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(FXMLAddBrandController.class.getResource("FXMLAddBrand.fxml"));
+        Parent root = (Parent) loader.load();
+        FXMLAddBrandController addController = (FXMLAddBrandController) loader.getController();
+        addController.initializeOnEditProductControllerCall(this, marcaObservableList);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    
+    @FXML
+    private void changetoAddSize(ActionEvent event) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(FXMLAddSizeController.class.getResource("FXMLAddSize.fxml"));
+        Parent root = (Parent) loader.load();
+        FXMLAddSizeController addController = (FXMLAddSizeController) loader.getController();
+        addController.initializeOnEditProductControllerCall(this, tamanhoObservableList);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    
+    @FXML
+    private void changetoAddCategory(ActionEvent event) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(FXMLAddCategoryController.class.getResource("FXMLAddCategory.fxml"));
+        Parent root = (Parent) loader.load();
+        FXMLAddCategoryController addController = (FXMLAddCategoryController) loader.getController();
+        addController.initializeOnEditProductControllerCall(this, tipoProdutoObservableList);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    
+    @FXML
+    private void changetoAddColor(ActionEvent event) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(FXMLAddColorController.class.getResource("FXMLAddColor.fxml"));
+        Parent root = (Parent) loader.load();
+        FXMLAddColorController addController = (FXMLAddColorController) loader.getController();
+        addController.initializeOnEditProductControllerCall(this, corObservableList);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    
     
     /* * Closes the stage on cancel button click * */
     @FXML void onCancelClick(ActionEvent event)
