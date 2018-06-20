@@ -7,11 +7,15 @@ package projetoii.design.administrator.warehouse.employee.edit;
 
 import helpers.FuncionarioBLL;
 import helpers.HorarioBLL;
+import helpers.LocalTrabalhoBLL;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,8 +37,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.apache.commons.lang3.text.WordUtils;
+import projetoii.design.administrator.menu.top.FXMLAdministratorTopMenuController;
 import projetoii.design.administrator.warehouse.employee.list.FXMLListEmployeeController;
 import services.HorarioService;
+import services.LocalTrabalhoService;
 
 public class FXMLEditEmployeeController implements Initializable {
 
@@ -327,6 +334,75 @@ public class FXMLEditEmployeeController implements Initializable {
             }
             
         }));
+    }
+    
+    /**
+     * Sets the new employee, updates in the database, refreshes the list controller table and closes current window
+     * @param event triggered event
+     * @throws IOException 
+     */
+    @FXML
+    void onEditButtonClick(ActionEvent event) throws IOException
+    {
+        employee.setNome(WordUtils.capitalizeFully(nameField.getText()));
+        employee.setNome(nameField.getText());
+        employee.setDatanascimento(getDateFromLocalDate(birthdayDate.getValue()));
+        employee.setSexo(getGender(genderBox.getSelectionModel().getSelectedIndex()));
+        employee.setActivo(getActive());
+        employee.setTipo(getType());
+        employee.setMorada(addressField.getText());
+        
+        scheduleList.forEach((schedule) -> {
+            if(schedule.getIdhorario() == scheduleID)
+            {
+                employee.setHorario(schedule);
+            }
+        });
+        
+        List<LocalTrabalhoBLL> workingLocation = LocalTrabalhoService.getHelperList("FROM Localtrabalho WHERE idlocaltrabalho = " + FXMLAdministratorTopMenuController.getWorkLocationId());
+        employee.setLocaltrabalho(workingLocation.get(0));
+        
+        updateEmployee(employee);
+        
+        this.listEmployeeController.employeeTable.refresh();
+        closeStage(event);
+    }
+    
+    private Date getDateFromLocalDate(LocalDate localDate)
+    {
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date = Date.from(instant);
+        return date;
+    }
+    
+    private boolean getType()
+    {
+        return typeBox.getSelectionModel().getSelectedIndex() == 0;
+    }
+    
+    private char getGender(int index)
+    {
+        switch(index)
+        {
+            case 0: { return 'U'; }
+            case 1: { return 'M'; }
+            case 2: { return 'F'; }
+        }
+        
+        return 'U';
+    }
+    
+    private boolean getActive()
+    {
+        return activeBox.getSelectionModel().getSelectedIndex() == 0;
+    }
+    
+    /**
+     * Updates entity on database
+     */
+    private void updateEmployee(FuncionarioBLL employee)
+    {
+        employee.update();
     }
     
     /* * Closes the stage on cancel button click * */

@@ -238,7 +238,6 @@ public class FXMLAddEmployeeController implements Initializable {
     @FXML private void onAddClick()
     {
         FuncionarioBLL employee = new FuncionarioBLL();
-        
         employee.setNome(nameField.getText());
         employee.setUsername(usernameField.getText());
         employee.setPassword(Short.parseShort(passwordField.getText()));
@@ -247,9 +246,6 @@ public class FXMLAddEmployeeController implements Initializable {
         employee.setActivo(getActive());
         employee.setTipo(getType());
         employee.setMorada(addressField.getText());
-        
-        //List<HorarioBLL> schedule = HorarioService.getHelperList("FROM Horario WHERE idhorario = " + scheduleID);
-        
         
         scheduleList.forEach((schedule) -> {
             if(schedule.getIdhorario() == scheduleID)

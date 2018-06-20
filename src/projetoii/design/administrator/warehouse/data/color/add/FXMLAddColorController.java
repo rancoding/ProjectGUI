@@ -34,7 +34,11 @@ public class FXMLAddColorController implements Initializable {
         addColorButton.setDisable(true);
     }    
    
-    /* * Initializes all variables when getting called from another controller * */
+    /**
+     * Initializes all variables when getting called from another controller
+     * @param addProductController controller who called this controller
+     * @param colorList all colors
+     */
     public void initializeOnAddProductControllerCall(FXMLAddProductController addProductController, ObservableList<CorBLL> colorList)
     {
         setListAddProductController(addProductController);
@@ -47,8 +51,11 @@ public class FXMLAddColorController implements Initializable {
         this.addProductController = addProductController;
     }
     
-    
-    /* * Initializes all variables when getting called from another controller * */
+    /**
+     * Initializes all variables when getting called from another controller
+     * @param listColorController controller who called this controller
+     * @param colorList all colors
+     */
     public void initializeOnControllerCall(FXMLListColorController listColorController, ObservableList<CorBLL> colorList)
     {
         setListController(listColorController);
@@ -67,7 +74,10 @@ public class FXMLAddColorController implements Initializable {
         this.colorList = colorList;
     }
     
-    /* * Adds a new color and updates the database * */
+    /**
+     * Adds a new color and updates the database
+     * @param event triggered event
+     */
     @FXML void onAddClick(ActionEvent event)
     {
         String nonCharacters = "[^\\p{L}\\p{Nd}]";
@@ -93,7 +103,12 @@ public class FXMLAddColorController implements Initializable {
         closeStage(event);
     }
     
-    /* * Searches for a color with the same name as the new one in the color list * */
+    /**
+     * Searches for a color with the same name as the new one in the color list
+     * @param name name that will be searched for its existence
+     * @param nonCharacters characters to be stripped from the name
+     * @return name existence
+     */
     private boolean checkForExistentColor(String name, String nonCharacters)
     {
         if(!(colorList.isEmpty()))
@@ -112,7 +127,9 @@ public class FXMLAddColorController implements Initializable {
         return false;
     }
     
-    /* * Enables or disables the button * */
+    /**
+     * Enables or disables the button
+     */
     @FXML void setAddButtonUsability()
     {
         String nonCharacters = "[^\\p{L}\\p{Nd}]";
@@ -140,19 +157,28 @@ public class FXMLAddColorController implements Initializable {
         }
     }
     
-    /* * Inserts entity into the database * */
+    /**
+     * Inserts entity into the database
+     * @param color color to be created
+     */
     private void insertColor(CorBLL color)
     {
         color.create();
     }
     
-    /* * Closes the stage on cancel button click * */
+    /**
+     * Closes the stage on cancel button click
+     * @param event triggered event
+     */
     @FXML void onCancelClick(ActionEvent event)
     {
         closeStage(event);
     }
     
-    /* * Closes current window * */
+    /**
+     * Closes current window
+     * @param event triggered event
+     */
     private void closeStage(ActionEvent event)
     {
         Node node = (Node)event.getSource();

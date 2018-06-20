@@ -130,13 +130,12 @@ public class FXMLLoginPasswordController implements Initializable {
                 menuController.initializeOnControllerCall(employee);
                 
                 Stage stage = new Stage();
-                stage.setTitle("Menu de Funcionário");
+                stage.setTitle("Funcionário");
                 stage.setScene(new Scene(root));
                 stage.show();
             } 
             catch (IOException ex) 
             {
-                Logger.getLogger(FXMLLoginPasswordController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else

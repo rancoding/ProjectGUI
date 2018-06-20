@@ -153,7 +153,7 @@ public class FXMLEditCategoryController implements Initializable {
 
                 if(exists)
                 {
-                    disableEditButtonAndShowError("Tipo de producto já existe");
+                    disableEditButtonAndShowError("Categoria já existe");
                 }
                 else
                 {

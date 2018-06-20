@@ -55,6 +55,8 @@ public class FXMLListBrandController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        idColumn.setStyle("-fx-alignment: CENTER;");
+        
         /* Retrieves all database brands to an arraylist and initializes the table values if it is not empty */
         List<MarcaBLL> brandList = MarcaService.getHelperList("FROM Marca ORDER BY idmarca ASC");
         
@@ -70,7 +72,7 @@ public class FXMLListBrandController implements Initializable {
     }
     
     /**
-     * Initializes all table content for the first time
+     * Initializes all table content
      * @param brandList data that will be shown in the table
      */
     private void initializeTable(List<MarcaBLL> brandList)

@@ -23,7 +23,7 @@ public class FXMLAdministratorTopMenuController implements Initializable {
     @FXML private BorderPane adminTopMenu;
     
     private static int workLocationId;
-
+    
     public static int getWorkLocationId() {
         return workLocationId;
     }

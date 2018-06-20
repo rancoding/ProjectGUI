@@ -17,7 +17,7 @@
             <Button layoutX="672.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleAddButtonAction" text="+" />
          </children>
       </Pane>
-      <TableView fx:id="employeeTable" layoutX="10.0" layoutY="40.0" prefHeight="240.0" prefWidth="686.0">
+      <TableView id="employeeTable" fx:id="employeeTable" layoutX="10.0" layoutY="40.0" prefHeight="240.0" prefWidth="686.0" stylesheets="@css/table/tableAlignment.css">
          <columns>
             <TableColumn fx:id="nameColumn" prefWidth="248.0" text="Nome" />
             <TableColumn fx:id="birthdayColumn" prefWidth="134.0" text="Data de Nascimento" />

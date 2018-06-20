@@ -14,7 +14,7 @@
       <ComboBox layoutX="396.0" layoutY="10.0" prefWidth="60.0" promptText="PT" />
       <Pane layoutY="45.0" prefHeight="60.0" prefWidth="470.0" style="-fx-background-color: #E2E2E2;">
          <children>
-            <Button fx:id="addBrandButton" layoutX="300.0" layoutY="18.0" mnemonicParsing="false" onAction="#onAddClick" prefWidth="50.0" text="OK" />
+            <Button fx:id="addBrandButton" layoutX="250.0" layoutY="18.0" mnemonicParsing="false" onAction="#onAddClick" prefWidth="100.0" text="ADICIONAR" />
             <Button layoutX="360.0" layoutY="18.0" mnemonicParsing="false" onAction="#onCancelClick" prefWidth="100.0" text="CANCELAR" />
             <Label fx:id="errorLabel" layoutX="14.0" layoutY="22.0" prefWidth="200.0" textFill="#b75050" />
          </children>

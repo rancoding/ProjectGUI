@@ -46,7 +46,7 @@
       </TableView>
       <Pane layoutY="440.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #e2e2e2;">
          <children>
-            <Button layoutX="430.0" layoutY="18.0" mnemonicParsing="false" onAction="#onAddClick" prefWidth="50.0" text="OK" />
+            <Button layoutX="380.0" layoutY="18.0" mnemonicParsing="false" onAction="#onAddClick" prefWidth="100.0" text="ADICIONAR" />
             <Button layoutX="490.0" layoutY="18.0" mnemonicParsing="false" onAction="#onCancelClick" prefWidth="100.0" text="CANCELAR" />
          </children>
       </Pane>

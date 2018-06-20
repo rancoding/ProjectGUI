@@ -33,6 +33,16 @@ public class FXMLAccountTypeController implements Initializable {
     @FXML private Label userButtonLabel;
     @FXML private Label adminButtonLabel;
     
+    private static Stage stage;
+
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static void setStage(Stage stage) {
+        FXMLAccountTypeController.stage = stage;
+    }
+    
     /**
      * Initializes the controller class.
      */
@@ -83,13 +93,13 @@ public class FXMLAccountTypeController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
             Parent root = (Parent) loader.load();
             Stage stage = new Stage();
-            stage.setTitle(title);
-            stage.setScene(new Scene(root));
-            stage.show();
+            setStage(stage);
+            getStage().setTitle(title);
+            getStage().setScene(new Scene(root));
+            getStage().show();
         }
         catch (IOException ex)
         {
-            ex.printStackTrace();
             System.out.println("Não foi possível abrir o ficheiro " + file);
         }
     }

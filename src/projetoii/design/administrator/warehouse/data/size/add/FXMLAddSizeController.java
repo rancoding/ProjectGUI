@@ -38,7 +38,11 @@ public class FXMLAddSizeController implements Initializable {
     
     }
     
-     /* * Initializes all variables when getting called from another controller * */
+    /**
+     * Initializes all variables when getting called from another controller
+     * @param addProductController controller who called this controller
+     * @param sizeList all sizes
+     */
     public void initializeOnAddProductControllerCall(FXMLAddProductController addProductController, ObservableList<TamanhoBLL> sizeList)
     {
         setListAddProductController(addProductController);
@@ -51,7 +55,11 @@ public class FXMLAddSizeController implements Initializable {
         this.addProductController = addProductController;
     }
     
-    /* * Initializes all variables when getting called from another controller * */
+    /**
+     * Initializes all variables when getting called from another controller
+     * @param listSizeController controller who called this controller
+     * @param sizeList all sizes
+     */
     public void initializeOnControllerCall(FXMLListSizeController listSizeController, ObservableList<TamanhoBLL> sizeList)
     {
         setListController(listSizeController);
@@ -70,7 +78,10 @@ public class FXMLAddSizeController implements Initializable {
         this.sizeList = sizeList;
     }
     
-    /* * Adds a new size and updates the database * */
+    /**
+     * Adds a new size and updates the database
+     * @param event triggered event
+     */
     @FXML void onAddClick(ActionEvent event)
     {
         String nonCharacters = "[^\\p{L}\\p{Nd}]";
@@ -96,7 +107,12 @@ public class FXMLAddSizeController implements Initializable {
         closeStage(event);
     }
     
-    /* * Searches for a size with the same name as the new one in the size list * */
+    /**
+     * Searches for a size with the same name as the new one in the size list
+     * @param name name to be searched
+     * @param nonCharacters characters to be stripped from the name
+     * @return name existence
+     */
     private boolean checkForExistentSize(String name, String nonCharacters)
     {
         if(!(sizeList.isEmpty()))
@@ -115,7 +131,9 @@ public class FXMLAddSizeController implements Initializable {
         return false;
     }
     
-    /* * Enables or disables the button * */
+    /**
+     * Enables or disables the button
+     */
     @FXML void setAddButtonUsability()
     {
         String nonCharacters = "[^\\p{L}\\p{Nd}]";
@@ -143,19 +161,28 @@ public class FXMLAddSizeController implements Initializable {
         }
     }
     
-    /* * Inserts entity into the database * */
+    /**
+     * Inserts entity into the database
+     * @param size size to be created
+     */
     private void insertSize(TamanhoBLL size)
     {
         size.create();
     }
     
-    /* * Closes the stage on cancel button click * */
+    /**
+     * Closes the stage on cancel button click
+     * @param event triggered event
+     */
     @FXML void onCancelClick(ActionEvent event)
     {
         closeStage(event);
     }
     
-    /* * Closes current window * */
+    /**
+     * Closes current window
+     * @param event triggered event
+     */
     private void closeStage(ActionEvent event)
     {
         Node node = (Node)event.getSource();

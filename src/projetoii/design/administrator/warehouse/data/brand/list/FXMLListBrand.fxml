@@ -14,7 +14,7 @@
       <Button layoutX="547.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleAddButtonAction" text="+" />
       <TableView fx:id="brandTable" layoutX="10.0" layoutY="45.0" prefHeight="235.0" prefWidth="561.0">
          <columns>
-            <TableColumn fx:id="idColumn" prefWidth="40.0" text="#" />
+            <TableColumn id="brandColumn" fx:id="idColumn" prefWidth="40.0" text="#" />
             <TableColumn fx:id="nameColumn" prefWidth="458.0" text="Nome" />
             <TableColumn fx:id="editColumn" minWidth="0.0" prefWidth="49.0">
                <graphic>

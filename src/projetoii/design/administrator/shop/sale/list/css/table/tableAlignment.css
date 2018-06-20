@@ -1,0 +1,7 @@
+#saleTable .table-column {
+    -fx-alignment: CENTER;
+}
+
+#productTable .table-column {
+    -fx-alignment: CENTER;
+}

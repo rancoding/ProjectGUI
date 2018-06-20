@@ -35,7 +35,12 @@ public class FXMLEditColorController implements Initializable {
         editColorNameButton.setDisable(true);
     }    
     
-    /* * To be called when needing to initialize values from the list color controller * */
+    /**
+     * To be called when needing to initialize values from the list color controller
+     * @param listColorController controller where this has been called from
+     * @param colorList all colors
+     * @param color color to be edited
+     */
     public void initializeOnControllerCall(FXMLListColorController listColorController, ObservableList<CorBLL> colorList, CorBLL color)
     {
         /* Sets all variables accordingly to received parameters */
@@ -65,7 +70,11 @@ public class FXMLEditColorController implements Initializable {
         this.colorName.setText(color.getNome());
     }
     
-    /* * Sets the new color name, updates in the database, refreshes the list controller table and closes current window * */
+    /**
+     * Sets the new color name, updates in the database, refreshes the list controller table and closes current window
+     * @param event triggered event
+     * @throws IOException 
+     */
     @FXML
     void onEditButtonClick(ActionEvent event) throws IOException
     {
@@ -77,7 +86,12 @@ public class FXMLEditColorController implements Initializable {
         closeStage(event);
     }
     
-    /* * Checks if the color name typed in the text field already exists * */
+    /**
+     * Checks if the color name typed in the text field already exists
+     * @param name name that will be checked if exists
+     * @param nonCharacters characters that will be stripped from the name
+     * @return name existence
+     */
     private boolean checkIfNameExists(String name, String nonCharacters)
     {
         for(CorBLL c : colorList)
@@ -96,14 +110,19 @@ public class FXMLEditColorController implements Initializable {
         return false;
     }
     
-    /* * If color name exists, disables edit button and shows an error in a label * */
+    /**
+     * If color name exists, disables edit button and shows an error in a label
+     * @param message error message
+     */
     private void disableEditButtonAndShowError(String message)
     {
         editColorNameButton.setDisable(true);
         errorLabel.setText(message);
     }
     
-    /* * Checks if the typed name exists, disabling or enabling the edit button accordingly, and showing label error * */
+    /**
+     * Checks if the typed name exists, disabling or enabling the edit button accordingly, and showing label error
+     */
     @FXML
     void checkNewNameToSetButtonDisable()
     {
@@ -148,19 +167,28 @@ public class FXMLEditColorController implements Initializable {
         }
     }
     
-    /* * Updates entity on database * */
+    /**
+     * Updates entity on database
+     * @param color color to be updated
+     */
     private void updateColor(CorBLL color)
     {
         color.update();
     }
     
-    /* * Closes the stage on cancel button click * */
+    /**
+     * Closes the stage on cancel button click
+     * @param event triggered event
+     */
     @FXML void onCancelClick(ActionEvent event)
     {
         closeStage(event);
     }
     
-    /* * Closes current window * */
+    /**
+     * Closes current window
+     * @param event triggered event
+     */
     private void closeStage(ActionEvent event)
     {
         Node node = (Node)event.getSource();

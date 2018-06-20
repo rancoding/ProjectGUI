@@ -70,7 +70,10 @@ public class FXMLAddCategoryController implements Initializable {
         this.productTypeList = productTypeList;
     }
     
-    /* * Adds a new category and updates the database * */
+    /**
+     * Adds a new category and updates the database
+     * @param event triggered event
+     */
     @FXML void onAddClick(ActionEvent event)
     {
         String nonCharacters = "[^\\p{L}\\p{Nd}]";
@@ -96,7 +99,12 @@ public class FXMLAddCategoryController implements Initializable {
         closeStage(event);
     }
     
-    /* * Searches for a category with the same name as the new one in the category list * */
+    /**
+     * Searches for a category with the same name as the new one in the category list
+     * @param name name that will be searched for existence
+     * @param nonCharacters non characters to be stripped from the name
+     * @return name existence
+     */
     private boolean checkForExistentCategory(String name, String nonCharacters)
     {
         if(!(productTypeList.isEmpty()))
@@ -115,7 +123,9 @@ public class FXMLAddCategoryController implements Initializable {
         return false;
     }
     
-    /* * Enables or disables the button * */
+    /**
+     * Enables or disables the button
+     */
     @FXML void setAddButtonUsability()
     {
         String nonCharacters = "[^\\p{L}\\p{Nd}]";
@@ -132,7 +142,7 @@ public class FXMLAddCategoryController implements Initializable {
         {
             if(exists)
             {
-                errorLabel.setText("Tipo de produto já existente");
+                errorLabel.setText("Categoria já existente");
                 addCategoryButton.setDisable(true);
             }
             else
@@ -143,19 +153,28 @@ public class FXMLAddCategoryController implements Initializable {
         }
     }
     
-    /* * Inserts entity into the database * */
+    /**
+     * Inserts entity into the database
+     * @param type product type that will be inserted into the database
+     */
     private void insertCategory(TipoProdutoBLL type)
     {
         type.create();
     }
     
-    /* * Closes the stage on cancel button click * */
+    /**
+     * Closes the stage on cancel button click
+     * @param event triggered event
+     */
     @FXML void onCancelClick(ActionEvent event)
     {
         closeStage(event);
     }
     
-    /* * Closes current window * */
+    /**
+     * Closes current window
+     * @param event triggered event
+     */
     private void closeStage(ActionEvent event)
     {
         Node node = (Node)event.getSource();

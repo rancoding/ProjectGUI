@@ -50,6 +50,8 @@ public class FXMLListSizeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        idColumn.setStyle("-fx-alignment: CENTER;");
+        
         /* Retrieves all database sizes to an arraylist and initializes the table values if it is not empty */
         List<TamanhoBLL> sizeList = TamanhoService.getHelperList("FROM Tamanho ORDER BY idtamanho ASC");
         
@@ -64,8 +66,10 @@ public class FXMLListSizeController implements Initializable {
         }
     }   
     
-    
-    /** Initializes all table content for the first time **/
+    /**
+     * Initializes all table content for the first time
+     * @param sizeList data that will be set onto the table
+     */
     private void initializeTable(List<TamanhoBLL> sizeList)
     {
         /* Sets column variables to use entity info, empty for a button creation */
@@ -83,13 +87,21 @@ public class FXMLListSizeController implements Initializable {
         setTableItems(sizeObservableList);
     }
     
-    /* * Sets the table items to be the same as the observable list items * */
+    /**
+     * Sets the table items to be the same as the observable list items
+     * @param sizeObservableList list that will be set onto the table
+     */
     private void setTableItems(ObservableList<TamanhoBLL> sizeObservableList)
     {
         this.sizeTable.setItems(sizeObservableList);
     }
     
-    /* Creates a button for each table cell, also setting up an image for each button (with a different hover image and size) */
+    /**
+     * Creates a button for each table cell, also setting up an image for each button (with a different hover image and size)
+     * @param image button image
+     * @param imageHover button image on mouse hover
+     * @return cell callback
+     */
     private Callback getButtonCell(Image image, Image imageHover)
     {
         Callback<TableColumn<TamanhoBLL, String>, TableCell<TamanhoBLL, String>> cellFactory;
@@ -137,7 +149,13 @@ public class FXMLListSizeController implements Initializable {
         return cellFactory;
     }
     
-    /* * Sets the button image and size * */
+    /**
+     * Sets the button image and size
+     * @param imageView button imageView
+     * @param image image that will be set on the imageView
+     * @param width desired image width
+     * @param height desired image height
+     */
     private void setButtonImageView(ImageView imageView, Image image, double width, double height)
     {
         imageView.setImage(image);
@@ -145,7 +163,13 @@ public class FXMLListSizeController implements Initializable {
         imageView.setFitHeight(height);
     }
     
-    /* * Sets a button image for each button and its hover * */
+    /**
+     * Sets a button image for each button and its hover
+     * @param button button to set the image on
+     * @param imageView button imageView
+     * @param image image that will be set onto the imageView
+     * @param imageHover image that will be shown on mouse hover
+     */
     private void setRowButton(Button button, ImageView imageView, Image image, Image imageHover)
     {
         button.setBackground(Background.EMPTY);
@@ -165,14 +189,23 @@ public class FXMLListSizeController implements Initializable {
         });
     }
     
-    /* * Loads a new window on button click * */
+    /**
+     * Loads a new window on button click
+     * @param event triggered event
+     */
     @FXML
     void handleAddButtonAction(ActionEvent event)
     {
         loadNewAddWindow(FXMLAddSizeController.class, "FXMLAddSize.fxml", "Armazém - Adicionar Tamanho", "Não foi possível carregar o ficheiro FXMLAddSize.fxml");
     }
     
-    /* * Loads a new add window * */
+    /**
+     * Loads a new add window
+     * @param controller file controller
+     * @param fileName file name
+     * @param title window title
+     * @param message error message
+     */
     private void loadNewAddWindow(Class controller, String fileName, String title, String message)
     {
         try
@@ -194,7 +227,14 @@ public class FXMLListSizeController implements Initializable {
         }
     }
     
-    /* * Loads a new edit window * */
+    /**
+     * Loads a new edit window
+     * @param controller file controller
+     * @param fileName file name
+     * @param title window title
+     * @param message error message
+     * @param size to be edited size
+     */
     private void loadNewEditWindow(Class controller, String fileName, String title, String message, TamanhoBLL size)
     {
         try
@@ -216,7 +256,9 @@ public class FXMLListSizeController implements Initializable {
         }
     }
     
-    /* * Searches for sizes when a key is pressed * */
+    /**
+     * Searches for sizes when a key is pressed
+     */
     @FXML
     void getSearchList()
     {
@@ -253,7 +295,10 @@ public class FXMLListSizeController implements Initializable {
         }
     }
     
-    /* * Sets new table values * */
+    /**
+     * Sets new table values
+     * @param sizeList data to be set onto the table
+     */
     public void setSearchedTableValues(List<TamanhoBLL> sizeList)
     {
         ObservableList<TamanhoBLL> newSizeObservableList;

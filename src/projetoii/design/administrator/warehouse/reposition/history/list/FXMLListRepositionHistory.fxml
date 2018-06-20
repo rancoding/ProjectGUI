@@ -9,18 +9,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="290.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projetoii.design.administrator.warehouse.reposition.history.list.FXMLListRepositionHistoryController">
     <children>
-      <TextField layoutX="10.0" layoutY="10.0" prefWidth="200.0" promptText="Pesquisar" />
-      <TableView layoutX="10.0" layoutY="45.0" prefHeight="235.0" prefWidth="686.0">
+      <TextField fx:id="searchRepositionTextField" layoutX="10.0" layoutY="10.0" onKeyPressed="#getSearchList" onKeyReleased="#getSearchList" prefWidth="200.0" promptText="Pesquisar" />
+      <TableView id="deliveryTable" fx:id="deliveryTable" layoutX="10.0" layoutY="45.0" prefHeight="235.0" prefWidth="686.0" stylesheets="@../../css/table/tableAlignment.css">
          <columns>
-            <TableColumn prefWidth="200.0" text="Armazém de Envio" />
-            <TableColumn prefWidth="111.0" text="Loja" />
-            <TableColumn prefWidth="150.0" text="Data de Envio" />
-            <TableColumn prefWidth="150.0" text="Data de Entrega" />
-            <TableColumn prefWidth="30.0">
-               <graphic>
-                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic></TableColumn>
-            <TableColumn prefWidth="30.0">
+            <TableColumn fx:id="warehouseColumn" prefWidth="175.0" text="Armazém de Envio" />
+            <TableColumn fx:id="shopColumn" prefWidth="169.0" text="Loja" />
+            <TableColumn fx:id="sentDateColumn" prefWidth="150.0" text="Data de Envio" />
+            <TableColumn fx:id="deliveredDateColumn" prefWidth="150.0" text="Data de Entrega" />
+            <TableColumn fx:id="detailColumn" prefWidth="30.0">
                <graphic>
                   <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>

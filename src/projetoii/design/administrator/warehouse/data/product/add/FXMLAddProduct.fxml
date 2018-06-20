@@ -29,7 +29,7 @@
       <TextField fx:id="sellPriceText" alignment="CENTER_RIGHT" layoutX="440.0" layoutY="183.0" onKeyReleased="#setAddButtonUsability" prefWidth="150.0" />
       <Pane layoutY="220.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #E2E2E2;">
          <children>
-            <Button fx:id="addProductButton" layoutX="430.0" layoutY="18.0" mnemonicParsing="false" onAction="#addProduto" prefWidth="50.0" style="-fx-background-color: #;" text="OK" />
+            <Button fx:id="addProductButton" layoutX="380.0" layoutY="18.0" mnemonicParsing="false" onAction="#addProduto" prefWidth="100.0" style="-fx-background-color: #;" text="ADICIONAR" />
             <Button layoutX="490.0" layoutY="18.0" mnemonicParsing="false" onAction="#onCancelClick" prefWidth="100.0" text="CANCELAR" />
             <Label fx:id="errorLabel" layoutX="14.0" layoutY="22.0" prefHeight="17.0" prefWidth="406.0" textFill="#b75050" />
          </children>

@@ -1,0 +1,11 @@
+#deliveryProductTable .table-column {
+    -fx-alignment: CENTER;
+}
+
+#productTable .table-column {
+    -fx-alignment: CENTER;
+}
+
+#deliveryTable .table-column {
+    -fx-alignment: CENTER;
+}

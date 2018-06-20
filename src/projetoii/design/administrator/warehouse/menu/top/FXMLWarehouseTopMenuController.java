@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import projetoii.FXMLAccountTypeController;
 import projetoii.design.administrator.warehouse.box.list.FXMLListBoxController;
 import projetoii.design.administrator.warehouse.employee.list.FXMLListEmployeeController;
 import projetoii.design.administrator.warehouse.menu.left.FXMLWarehouseLeftMenuController;
@@ -25,11 +26,22 @@ public class FXMLWarehouseTopMenuController implements Initializable {
     @FXML private ToggleButton employeeButton;
     @FXML private ToggleButton repositionButton;
     @FXML private ToggleButton boxButton;
-    @FXML private BorderPane warehouseTopMenu;
+    @FXML public BorderPane warehouseTopMenu;
+    
+    private static BorderPane staticPane;
+
+    public static BorderPane getStaticPane() {
+        return staticPane;
+    }
+
+    public static void setStaticPane(BorderPane staticPane) {
+        FXMLWarehouseTopMenuController.staticPane = staticPane;
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        setStaticPane(warehouseTopMenu);
         switchCenter();
     }    
     
@@ -39,7 +51,7 @@ public class FXMLWarehouseTopMenuController implements Initializable {
     private void switchCenter()
     {
         disableButtonSelection(true, false, false, false);
-        this.switchCenter(FXMLWarehouseLeftMenuController.class, "FXMLWarehouseLeftMenu.fxml");
+        this.switchCenter(FXMLWarehouseLeftMenuController.class, "FXMLWarehouseLeftMenu.fxml", "Administrador - Armazém");
     }
     
     /**
@@ -53,28 +65,28 @@ public class FXMLWarehouseTopMenuController implements Initializable {
             case "warehouseButton":
             {
                 disableButtonSelection(true, false, false, false);
-                switchCenter(FXMLWarehouseLeftMenuController.class, "FXMLWarehouseLeftMenu.fxml");
+                switchCenter(FXMLWarehouseLeftMenuController.class, "FXMLWarehouseLeftMenu.fxml", "Administrador - Armazém");
                 break;
             }
             
             case "employeeButton":
             {
                 disableButtonSelection(false, true, false, false);
-                switchCenter(FXMLListEmployeeController.class, "FXMLListEmployee.fxml");
+                switchCenter(FXMLListEmployeeController.class, "FXMLListEmployee.fxml", "Administrador - Listagem de Funcionários");
                 break;
             }
             
             case "repositionButton":
             {
                 disableButtonSelection(false, false, true, false);
-                switchCenter(FXMLListCurrentRepositionController.class, "FXMLListCurrentReposition.fxml");
+                switchCenter(FXMLListCurrentRepositionController.class, "FXMLListCurrentReposition.fxml", "Administrador - Listagem de Reposições");
                 break;
             }
             
             case "boxButton":
             {
                 disableButtonSelection(false, false, false, true);
-                switchCenter(FXMLListBoxController.class, "FXMLListBox.fxml");
+                switchCenter(FXMLListBoxController.class, "FXMLListBox.fxml", "Administrador - Listagem de Caixas");
                 break;
             }
         }
@@ -85,12 +97,13 @@ public class FXMLWarehouseTopMenuController implements Initializable {
      * @param controller To be displayed controller
      * @param file To be opened file
      */
-    private void switchCenter(Class controller, String file)
+    private void switchCenter(Class controller, String file, String title)
     {
         try
         {
             Pane newPane = FXMLLoader.load(controller.getResource(file));
             warehouseTopMenu.setCenter(newPane);
+            FXMLAccountTypeController.getStage().setTitle(title);
         }
         catch(Exception e)
         {

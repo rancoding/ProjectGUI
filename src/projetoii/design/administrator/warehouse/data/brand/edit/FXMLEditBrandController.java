@@ -5,10 +5,7 @@
  */
 package projetoii.design.administrator.warehouse.data.brand.edit;
 
-import dao.Marca;
 import helpers.MarcaBLL;
-import hibernate.HibernateGenericLibrary;
-import hibernate.HibernateUtil;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,8 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import projetoii.design.administrator.warehouse.data.brand.list.FXMLListBrandController;
 
 /**

@@ -44,7 +44,12 @@ public class FXMLEditSizeController implements Initializable {
         editSizeNameButton.setDisable(true);
     }    
     
-    /* * To be called when needing to initialize values from the list size controller * */
+    /**
+     * To be called when needing to initialize values from the list size controller
+     * @param listSizeController controller where this controller has been called from
+     * @param sizeList all sizes
+     * @param size to be edited size
+     */
     public void initializeOnControllerCall(FXMLListSizeController listSizeController, ObservableList<TamanhoBLL> sizeList, TamanhoBLL size)
     {
         /* Sets all variables accordingly to received parameters */
@@ -74,7 +79,11 @@ public class FXMLEditSizeController implements Initializable {
         this.sizeName.setText(size.getDescricao());
     }
     
-    /* * Sets the new size name, updates in the database, refreshes the list controller table and closes current window * */
+    /**
+     * Sets the new size name, updates in the database, refreshes the list controller table and closes current window
+     * @param event triggered event
+     * @throws IOException 
+     */
     @FXML
     void onEditButtonClick(ActionEvent event) throws IOException
     {
@@ -86,7 +95,12 @@ public class FXMLEditSizeController implements Initializable {
         closeStage(event);
     }
     
-    /* * Checks if the size name typed in the text field already exists * */
+    /**
+     * Checks if the size name typed in the text field already exists
+     * @param name name to be searched
+     * @param nonCharacters characters to be stripped
+     * @return name existence
+     */
     private boolean checkIfNameExists(String name, String nonCharacters)
     {
         for(TamanhoBLL s : sizeList)
@@ -105,15 +119,19 @@ public class FXMLEditSizeController implements Initializable {
         return false;
     }
     
-    /* * If size name exists, disables edit button and shows an error in a label * */
+    /**
+     * If size name exists, disables edit button and shows an error in a label
+     * @param message error message
+     */
     private void disableEditButtonAndShowError(String message)
     {
         editSizeNameButton.setDisable(true);
         errorLabel.setText(message);
     }
     
-    
-    /* * Checks if the typed name exists, disabling or enabling the edit button accordingly, and showing label error * */
+    /**
+     * Checks if the typed name exists, disabling or enabling the edit button accordingly, and showing label error
+     */
     @FXML
     void checkNewNameToSetButtonDisable()
     {
@@ -158,19 +176,28 @@ public class FXMLEditSizeController implements Initializable {
         }
     }
     
-    /* * Updates entity on database * */
+    /**
+     * Updates entity on database
+     * @param size to be updated size
+     */
     private void updateSize(TamanhoBLL size)
     {
         size.update();
     }
     
-    /* * Closes the stage on cancel button click * */
+    /**
+     * Closes the stage on cancel button click
+     * @param event triggered event
+     */
     @FXML void onCancelClick(ActionEvent event)
     {
         closeStage(event);
     }
     
-    /* * Closes current window * */
+    /**
+     * Closes current window
+     * @param event triggered event
+     */
     private void closeStage(ActionEvent event)
     {
         Node node = (Node)event.getSource();

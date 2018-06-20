@@ -13,24 +13,24 @@
     <children>
       <Pane prefHeight="40.0" prefWidth="706.0">
          <children>
-            <TextField layoutX="10.0" layoutY="8.0" prefWidth="200.0" promptText="Pesquisar" />
-            <Button layoutX="672.0" layoutY="8.0" mnemonicParsing="false" text="+" />
+            <TextField fx:id="searchEmployeeTextField" layoutX="10.0" layoutY="8.0" onKeyPressed="#getSearchList" onKeyReleased="#getSearchList" prefWidth="200.0" promptText="Pesquisar" />
+            <Button layoutX="672.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleAddButtonAction" text="+" />
          </children>
       </Pane>
-      <TableView layoutX="10.0" layoutY="40.0" prefHeight="240.0" prefWidth="686.0">
+      <TableView id="employeeTable" fx:id="employeeTable" layoutX="10.0" layoutY="40.0" prefHeight="240.0" prefWidth="686.0" stylesheets="@css/table/tableAlignment.css">
          <columns>
-            <TableColumn prefWidth="248.0" text="Nome" />
-            <TableColumn prefWidth="134.0" text="Data de Nascimento" />
-            <TableColumn prefWidth="95.0" text="Sexo" />
-            <TableColumn prefWidth="75.0" text="Activo" />
-            <TableColumn prefWidth="40.0">
+            <TableColumn fx:id="nameColumn" prefWidth="248.0" text="Nome" />
+            <TableColumn fx:id="birthdayColumn" prefWidth="134.0" text="Data de Nascimento" />
+            <TableColumn fx:id="genderColumn" prefWidth="95.0" text="Sexo" />
+            <TableColumn fx:id="workingColumn" prefWidth="75.0" text="Activo" />
+            <TableColumn fx:id="editColumn" prefWidth="40.0">
                <graphic>
                   <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/edit.png" />
                      </image></ImageView>
                </graphic></TableColumn>
-            <TableColumn prefWidth="40.0">
+            <TableColumn fx:id="scheduleColumn" prefWidth="40.0">
                <graphic>
                   <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,7 +38,7 @@
                      </image></ImageView>
                </graphic>
             </TableColumn>
-            <TableColumn prefWidth="40.0">
+            <TableColumn fx:id="detailColumn" prefWidth="40.0">
                <graphic>
                   <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>

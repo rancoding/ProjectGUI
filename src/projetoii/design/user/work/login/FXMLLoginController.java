@@ -5,7 +5,6 @@
  */
 package projetoii.design.user.work.login;
 
-import dao.Funcionario;
 import dao.Loja;
 import helpers.FuncionarioBLL;
 import helpers.LojaBLL;
@@ -14,8 +13,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,9 +21,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
-import projetoii.design.administrator.warehouse.employee.add.FXMLAddEmployeeController;
 import projetoii.design.user.work.login.password.FXMLLoginPasswordController;
 import services.FuncionarioService;
 import services.LojaService;
@@ -77,6 +73,8 @@ public class FXMLLoginController implements Initializable {
     @FXML private Button prevButton;
     @FXML private Button nextButton;
     
+    @FXML private Label pageLabel;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -85,6 +83,11 @@ public class FXMLLoginController implements Initializable {
         buttonList = new ArrayList<>();
         
         shopList = LojaService.getHelperList("FROM Loja l WHERE (SELECT COUNT(*) FROM Funcionario f WHERE l.idloja = f.localtrabalho) > 0 ORDER BY idloja ASC");
+        
+        System.out.println(shopList.size());
+        shopList.forEach((shop) -> {
+            System.out.println(shop.getIdloja());
+        });
         
         if(!(shopList.isEmpty()))
         {
@@ -95,6 +98,7 @@ public class FXMLLoginController implements Initializable {
         employeeList = FuncionarioService.getHelperList("FROM Funcionario WHERE localtrabalho.idlocaltrabalho = " + shopList.get(0).getIdloja() + " ORDER BY nome");
         
         setButtonList();
+        setLabelPage();
         enableButtons();
     }
     
@@ -159,12 +163,14 @@ public class FXMLLoginController implements Initializable {
     @FXML private void clickNextButton()
     {
         setCurrentPage(getCurrentPage() + 1);
+        setLabelPage();
         enableButtons();
     }
     
     @FXML private void clickPrevButton()
     {
         setCurrentPage(getCurrentPage() - 1);
+        setLabelPage();
         enableButtons();
     }
     
@@ -173,10 +179,11 @@ public class FXMLLoginController implements Initializable {
      */
     @FXML private void getNewEmployeeList()
     {
+        setCurrentPage(0);
         employeeList.clear();
         employeeList = FuncionarioService.getHelperList("FROM Funcionario WHERE localtrabalho.idlocaltrabalho = " + ((LojaBLL) workLocationComboBox.getSelectionModel().getSelectedItem()).getIdloja() + " ORDER BY nome ASC");
         enableButtons();
-        setCurrentPage(0);
+        setLabelPage();
     }
     
     /**
@@ -277,8 +284,6 @@ public class FXMLLoginController implements Initializable {
             }
         }
         
-        System.out.println(employee.getNome());
-        System.out.println(employee.getPassword());
         openPasswordWindow( employee );
     }
     
@@ -304,21 +309,8 @@ public class FXMLLoginController implements Initializable {
         }
     }
     
-    /* * Converts combobox to show working place names * */
-    private void setComboBoxConverter()
+    private void setLabelPage()
     {
-        workLocationComboBox.setConverter(new StringConverter() {
-            @Override
-            public String toString(Object object)
-            {
-                return ((Loja) object).getNome();
-            }
-
-            @Override
-            public Object fromString(String string) {
-                return "";
-            }
-        });
+        this.pageLabel.setText("Página " + (getCurrentPage() + 1) + " de " + (int)Math.ceil((float)employeeList.size() / 12.0f));
     }
-    
 }

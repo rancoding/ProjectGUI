@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import projetoii.FXMLAccountTypeController;
 import projetoii.design.administrator.shop.employee.list.FXMLListEmployeeController;
 import projetoii.design.administrator.shop.menu.left.FXMLShopLeftMenuController;
 import projetoii.design.administrator.shop.reposition.history.list.FXMLListRepositionHistoryController;
@@ -36,7 +37,7 @@ public class FXMLShopTopMenuController implements Initializable {
     private void switchCenter()
     {
         disableButtonSelection(true, false, false, false);
-        this.switchCenter(FXMLShopLeftMenuController.class, "FXMLShopLeftMenu.fxml");
+        this.switchCenter(FXMLShopLeftMenuController.class, "FXMLShopLeftMenu.fxml", "Administrador - Loja");
     }
     
     /* * Switches border pane center depending on selected combobox item * */
@@ -46,51 +47,45 @@ public class FXMLShopTopMenuController implements Initializable {
         {  
             case "shopButton":
             {
-                System.out.println("Hello");
                 disableButtonSelection(true, false, false, false);
-                System.out.println("Hello2");
-                switchCenter(FXMLShopLeftMenuController.class, "FXMLShopLeftMenu.fxml");
-                System.out.println("Hello3");
+                switchCenter(FXMLShopLeftMenuController.class, "FXMLShopLeftMenu.fxml", "Administrador - Loja");
                 break;
             }
             
             case "employeeButton":
             {
                 disableButtonSelection(false, true, false, false);
-                switchCenter(FXMLListEmployeeController.class, "FXMLListEmployee.fxml");
+                switchCenter(FXMLListEmployeeController.class, "FXMLListEmployee.fxml", "Administrador - Listagem de Funcionários");
                 break;
             }
             
             case "repositionButton":
             {
                 disableButtonSelection(false, false, true, false);
-                switchCenter(FXMLListRepositionHistoryController.class, "FXMLListRepositionHistory.fxml");
+                switchCenter(FXMLListRepositionHistoryController.class, "FXMLListRepositionHistory.fxml", "Administrador - Listagem de Reposições");
                 break;
             }
             
             case "saleButton":
             {
                 disableButtonSelection(false, false, false, true);
-                switchCenter(FXMLListSaleController.class, "FXMLListSale.fxml");
+                switchCenter(FXMLListSaleController.class, "FXMLListSale.fxml", "Administrador - Listagem de Vendas");
                 break;
             }
         }
     }
     
     /* * Sets the border pane center * */
-    private void switchCenter(Class controller, String file)
+    private void switchCenter(Class controller, String file, String title)
     {
         try
         {
-            System.out.println("Hello4");
             Pane newPane = FXMLLoader.load(controller.getResource(file));
-            System.out.println("Hello5");
             shopTopMenu.setCenter(newPane);
-            System.out.println("Hello6");
+            FXMLAccountTypeController.getStage().setTitle(title);
         }
         catch(Exception e)
         {
-            e.printStackTrace();
         }
     }
     

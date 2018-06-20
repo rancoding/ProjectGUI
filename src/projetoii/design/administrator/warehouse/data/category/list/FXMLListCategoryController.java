@@ -45,6 +45,8 @@ public class FXMLListCategoryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        idColumn.setStyle("-fx-alignment: CENTER;");
+        
         /* Retrieves all database product types to an arraylist and initializes the table values if it is not empty */
         List<TipoProdutoBLL> productTypeList = TipoProdutoService.getHelperList("FROM Tipoproduto ORDER BY idtipoproduto ASC");
         
@@ -220,7 +222,6 @@ public class FXMLListCategoryController implements Initializable {
         }
     }
     
-    /* *  * */
     /**
      * Loads a new edit window
      * @param controller Edit category controller

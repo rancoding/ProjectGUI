@@ -313,8 +313,11 @@ public class FXMLListEmployeeController implements Initializable {
                 
                 String employeeName = StringUtils.stripAccents(employee.getNome().replaceAll(nonCharacters, "").toLowerCase());
                 String employeeID = String.valueOf(employee.getIdfuncionario());
+                String date = StringUtils.stripAccents(String.valueOf(employee.getDatanascimento()).replaceAll(nonCharacters, "").toLowerCase());
+                String sex = StringUtils.stripAccents(String.valueOf(employee.getSexo()).replaceAll(nonCharacters, "").toLowerCase());
+                String active = StringUtils.stripAccents(String.valueOf(employee.isActivo()).replaceAll(nonCharacters, "").toLowerCase());
                 
-                if(employeeName.contains(searchString) || employeeID.contains(searchString))
+                if(employeeName.contains(searchString) || employeeID.contains(searchString) || date.contains(searchString) || sex.contains(searchString) || active.contains(searchString))
                 {
                     employeeList.add(employee);
                 }
