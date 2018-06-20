@@ -56,7 +56,6 @@ public class FXMLAccountTypeController implements Initializable {
         adminPane.addEventFilter(MouseEvent.MOUSE_CLICKED, event->{
             onButtonAction(event);
         });
-        
     }   
     
     /**
@@ -92,11 +91,11 @@ public class FXMLAccountTypeController implements Initializable {
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
             Parent root = (Parent) loader.load();
-            Stage stage = new Stage();
-            setStage(stage);
-            getStage().setTitle(title);
-            getStage().setScene(new Scene(root));
-            getStage().show();
+            Stage stg = new Stage();
+            stg.setTitle(title);
+            stg.setScene(new Scene(root));
+            stg.show();
+            setStage(stg);
         }
         catch (IOException ex)
         {

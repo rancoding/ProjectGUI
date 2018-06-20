@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.collections.ObservableList;
@@ -26,9 +27,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -51,10 +50,10 @@ public class FXMLListBoxController implements Initializable {
 
     /* Variables used for setting up the table content */
     @FXML public TableView<CaixaBLL> boxTable;
-    @FXML private TableColumn<CaixaBLL, String> boxNumberColumn;
-    @FXML private TableColumn<CaixaBLL, String> barCodeColumn;
+    @FXML private TableColumn<CaixaBLL, Integer> boxNumberColumn;
+    @FXML private TableColumn<CaixaBLL, Long> barCodeColumn;
     @FXML private TableColumn<CaixaBLL, String> nameColumn;
-    @FXML private TableColumn<CaixaBLL, String> quantityColumn;
+    @FXML private TableColumn<CaixaBLL, Short> quantityColumn;
     @FXML private TableColumn<CaixaBLL, String> editColumn;
     @FXML private TableColumn<CaixaBLL, String> deleteColumn;
     @FXML private TreeTableColumn<CaixaBLL, String> detailColumn;
@@ -87,9 +86,9 @@ public class FXMLListBoxController implements Initializable {
     private void initializeTable(List<CaixaBLL> boxList)
     {
         /* Sets column variables to use entity info, empty for a button creation */
-        this.boxNumberColumn.setCellValueFactory(new PropertyValueFactory<>("idcaixa"));
-        this.barCodeColumn.setCellValueFactory(new PropertyValueFactory<>("codbarras"));
-        this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        this.boxNumberColumn.setCellValueFactory((TableColumn.CellDataFeatures<CaixaBLL, Integer> param) -> new SimpleObjectProperty<>(param.getValue().getId().getIdcaixa()));
+        this.barCodeColumn.setCellValueFactory((TableColumn.CellDataFeatures<CaixaBLL, Long> param) -> new SimpleObjectProperty<>(param.getValue().getProduto().getCodbarras()));
+        this.nameColumn.setCellValueFactory((TableColumn.CellDataFeatures<CaixaBLL, String> param) -> new SimpleObjectProperty<>(param.getValue().getProduto().getDescricao()));
         this.quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 
         this.editColumn.setCellValueFactory(new PropertyValueFactory<>(""));
@@ -245,7 +244,6 @@ public class FXMLListBoxController implements Initializable {
                             /* On edit button, opens an edit category window with the row category info and the list of existent categories */
                             button.setOnAction((event) -> {
                                 CaixaBLL box = getTableView().getItems().get(getIndex());
-                                System.out.println(box);
                                 //loadNewDetailWindow(FXMLProductDetailController.class, "FXMLProductDetail.fxml", "Armazém - Detalhe Produto", "Não foi possível carregar o ficheiro FXMLProductDetail.fxml", product);
                             });
                             
@@ -394,13 +392,12 @@ public class FXMLListBoxController implements Initializable {
     @FXML
     void getSearchList()
     {
-        List<CaixaBLL> typeList = new ArrayList<>();
+        List<CaixaBLL> boxList = new ArrayList<>();
             
         /* If something has been typed, tries to find an existent category with the given name or ID */
         if(searchBoxTextField.getText().length() > 0)
         {
-            typeList.clear();
-            TipoProdutoBLL type = new TipoProdutoBLL();
+            boxList.clear();
             
             String nonCharacters = "[^\\p{L}\\p{Nd}]";
             
@@ -409,22 +406,24 @@ public class FXMLListBoxController implements Initializable {
                 String searchString = StringUtils.stripAccents(searchBoxTextField.getText().replaceAll(nonCharacters, "").toLowerCase());
                 
                 String boxNumber = StringUtils.stripAccents(String.valueOf(box.getId()).replaceAll(nonCharacters, "").toLowerCase());
-                //String productCategory = StringUtils.stripAccents(type.toString().replaceAll(nonCharacters, "").toLowerCase());
+                String barCode = StringUtils.stripAccents(String.valueOf(box.getProduto().getCor()).replaceAll(nonCharacters, "").toLowerCase());
+                String productName = StringUtils.stripAccents(box.getProduto().getDescricao().replaceAll(nonCharacters, "").toLowerCase());
+                String quantity = StringUtils.stripAccents(String.valueOf(box.getQuantidade()).replaceAll(nonCharacters, "").toLowerCase());
                 
-                if(boxNumber.equals(searchString))
+                if(boxNumber.equals(searchString) || barCode.equals(searchString) || productName.equals(searchString) || quantity.equals(searchString))
                 {
-                    typeList.add(box);
+                    boxList.add(box);
                 }
             }
             
-            setSearchedTableValues(typeList);
+            setSearchedTableValues(boxList);
         }
         else /* If nothing has been typed, show full category list */
         {
-            typeList.clear();
+            boxList.clear();
             
-            typeList = boxObservableList;
-            setSearchedTableValues(typeList);
+            boxList = boxObservableList;
+            setSearchedTableValues(boxList);
         }
     }
     

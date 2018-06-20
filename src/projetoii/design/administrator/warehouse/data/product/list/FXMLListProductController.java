@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,7 +33,6 @@ import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
-import projetoii.design.administrator.warehouse.box.list.FXMLListBoxController;
 import projetoii.design.administrator.warehouse.data.product.add.FXMLAddProductController;
 import projetoii.design.administrator.warehouse.data.product.box.list.FXMLListProductBoxController;
 import projetoii.design.administrator.warehouse.data.product.detail.FXMLProductDetailController;
@@ -66,6 +66,8 @@ public class FXMLListProductController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        barCodeColumn.setStyle("-fx-alignment: CENTER;");
+        
         /* Retrieves all database product types to an arraylist and initializes the table values if it is not empty */
         List<ProdutoBLL> productList = ProdutoService.getHelperList("FROM Produto ORDER BY codbarras ASC");
         
@@ -86,8 +88,8 @@ public class FXMLListProductController implements Initializable {
         /* Sets column variables to use entity info, empty for a button creation */
         this.barCodeColumn.setCellValueFactory(new PropertyValueFactory<>("codbarras"));
         this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        this.categoryColumn.setCellValueFactory(new PropertyValueFactory<>("tipoproduto"));
-        this.sellPriceColumn.setCellValueFactory(new PropertyValueFactory<>("precovenda"));
+        this.categoryColumn.setCellValueFactory((TableColumn.CellDataFeatures<ProdutoBLL, String> param) -> new SimpleObjectProperty<>(param.getValue().getTipoproduto().getNome()));
+        this.sellPriceColumn.setCellValueFactory((TableColumn.CellDataFeatures<ProdutoBLL, String> param) -> new SimpleObjectProperty<>(String.valueOf(param.getValue().getPrecovenda()) + "€"));
 
         this.editColumn.setCellValueFactory(new PropertyValueFactory<>(""));
         this.boxColumn.setCellValueFactory(new PropertyValueFactory<>(""));
@@ -242,7 +244,6 @@ public class FXMLListProductController implements Initializable {
                             /* On edit button, opens an edit category window with the row category info and the list of existent categories */
                             button.setOnAction((event) -> {
                                 ProdutoBLL product = getTableView().getItems().get(getIndex());
-                                System.out.println(product);
                                 loadNewDetailWindow(FXMLProductDetailController.class, "FXMLProductDetail.fxml", "Armazém - Detalhe Produto", "Não foi possível carregar o ficheiro FXMLProductDetail.fxml", product);
                             });
                             
@@ -407,9 +408,10 @@ public class FXMLListProductController implements Initializable {
                 
                 String productName = StringUtils.stripAccents(prod.getDescricao().replaceAll(nonCharacters, "").toLowerCase());
                 String productBarCode = String.valueOf(prod.getCodbarras());
-                //String productCategory = StringUtils.stripAccents(type.toString().replaceAll(nonCharacters, "").toLowerCase());
+                String category = StringUtils.stripAccents(prod.getTipoproduto().getNome().replaceAll(nonCharacters, "").toLowerCase());
+                String price = StringUtils.stripAccents(String.valueOf(prod.getPrecovenda()).replaceAll(nonCharacters, "").toLowerCase());
                 
-                if(productName.contains(searchString) || productBarCode.contains(searchString))
+                if(productName.contains(searchString) || productBarCode.contains(searchString) || category.contains(searchString) || price.contains(searchString))
                 {
                     typeList.add(prod);
                 }

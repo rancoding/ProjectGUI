@@ -81,8 +81,5 @@ public class FXMLEmployeeSchedulePointController implements Initializable {
     
     private void getCurrentDate()
     {
-        pointList.forEach(point -> {
-            System.out.println(point.getId().getData());
-        });
     }
 }

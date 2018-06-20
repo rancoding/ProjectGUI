@@ -140,8 +140,7 @@ public class FXMLLoginPasswordController implements Initializable {
         }
         else
         {
-            System.out.println("You've failed this time!");
-            System.out.println(employee.getPassword());
+            /* Alerts an error */
         }
     }
 }

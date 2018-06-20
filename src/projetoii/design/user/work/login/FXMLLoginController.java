@@ -84,11 +84,6 @@ public class FXMLLoginController implements Initializable {
         
         shopList = LojaService.getHelperList("FROM Loja l WHERE (SELECT COUNT(*) FROM Funcionario f WHERE l.idloja = f.localtrabalho) > 0 ORDER BY idloja ASC");
         
-        System.out.println(shopList.size());
-        shopList.forEach((shop) -> {
-            System.out.println(shop.getIdloja());
-        });
-        
         if(!(shopList.isEmpty()))
         {
             workLocationComboBox.getItems().addAll(shopList);

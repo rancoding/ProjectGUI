@@ -17,26 +17,17 @@
             <Button layoutX="672.0" layoutY="8.0" mnemonicParsing="false" text="+" />
          </children>
       </Pane>
-      <TableView fx:id="boxTable" layoutX="10.0" layoutY="40.0" prefHeight="241.0" prefWidth="686.0">
+      <TableView id="boxTable" fx:id="boxTable" layoutX="10.0" layoutY="40.0" prefHeight="241.0" prefWidth="686.0" stylesheets="@css/table/tableAlignment.css">
         <columns>
-          <TableColumn fx:id="boxNumberColumn" prefWidth="75.0" text="Caixa" />
-          <TableColumn fx:id="barCodeColumn" prefWidth="160.0" text="Código de Barras" />
+          <TableColumn fx:id="boxNumberColumn" prefWidth="75.0" text="# Caixa" />
+          <TableColumn fx:id="barCodeColumn" prefWidth="174.0" text="Código de Barras" />
             <TableColumn fx:id="nameColumn" prefWidth="292.0" text="Produto" />
             <TableColumn fx:id="quantityColumn" prefWidth="97.0" text="Quantidade" />
             <TableColumn fx:id="editColumn" prefWidth="34.0">
                <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/edit.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </TableColumn>
-            <TableColumn fx:id="deleteColumn" prefWidth="27.0">
-               <graphic>
-                  <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@image/delete-button.png" />
                      </image>
                   </ImageView>
                </graphic>

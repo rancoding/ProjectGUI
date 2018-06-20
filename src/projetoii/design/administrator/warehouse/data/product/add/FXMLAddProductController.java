@@ -202,8 +202,6 @@ public class FXMLAddProductController implements Initializable {
 
                 if(newBarCode.equals(barCode))
                 {
-                    System.out.println(newBarCode);
-                    System.out.println(barCode);
                     return true;
                 }
             }
