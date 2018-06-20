@@ -34,6 +34,7 @@ import javafx.util.Callback;
 import org.apache.commons.lang3.StringUtils;
 import projetoii.design.administrator.warehouse.box.list.FXMLListBoxController;
 import projetoii.design.administrator.warehouse.data.product.add.FXMLAddProductController;
+import projetoii.design.administrator.warehouse.data.product.box.list.FXMLListProductBoxController;
 import projetoii.design.administrator.warehouse.data.product.detail.FXMLProductDetailController;
 import projetoii.design.administrator.warehouse.data.product.edit.FXMLEditProductController;
 import services.ProdutoService;
@@ -193,7 +194,7 @@ public class FXMLListProductController implements Initializable {
                             /* On edit button, opens an edit category window with the row category info and the list of existent categories */
                             button.setOnAction((event) -> {
                                 ProdutoBLL type = getTableView().getItems().get(getIndex());
-                                loadNewBoxWindow(FXMLListBoxController.class, "FXMLListBox.fxml", "Armazém - Editar Produto", "Não foi possível carregar o ficheiro FXMLListBox.fxml", type);
+                                loadNewBoxWindow(FXMLListProductBoxController.class, "FXMLListProductBox.fxml", "Armazém - Lista de Caixas do Produto", "Não foi possível carregar o ficheiro FXMLListProductBox.fxml", type);
                             });
                             
                             setGraphic(button);
@@ -350,7 +351,7 @@ public class FXMLListProductController implements Initializable {
             FXMLLoader loader = new FXMLLoader(controller.getResource(fileName));
             Parent root = (Parent) loader.load();
             
-            FXMLListBoxController listController = (FXMLListBoxController) loader.getController();
+            FXMLListProductBoxController listController = (FXMLListProductBoxController) loader.getController();
             listController.initializeOnControllerCall(this, productObservableList, type);
             
             Stage stage = new Stage();

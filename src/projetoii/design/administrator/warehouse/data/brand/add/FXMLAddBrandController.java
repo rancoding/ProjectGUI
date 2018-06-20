@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 import projetoii.design.administrator.warehouse.data.brand.list.FXMLListBrandController;
 import projetoii.design.administrator.warehouse.data.product.add.FXMLAddProductController;
+import projetoii.design.administrator.warehouse.data.product.edit.FXMLEditProductController;
 import services.MarcaService;
 
 public class FXMLAddBrandController implements Initializable {
@@ -25,6 +26,7 @@ public class FXMLAddBrandController implements Initializable {
     @FXML private Label errorLabel;
     
     private FXMLAddProductController addProductController;
+    private FXMLEditProductController editProductController;
     private FXMLListBrandController listBrandController;
     private ObservableList<MarcaBLL> brandList;
     
@@ -56,6 +58,26 @@ public class FXMLAddBrandController implements Initializable {
     private void setListAddProductController(FXMLAddProductController addProductController)
     {
         this.addProductController = addProductController;
+    }
+    
+    /**
+     * Initializes all variables when getting called from another controller
+     * @param editProductController Sets this controller to be the controller sent from the list controller
+     * @param brandList Current brand list
+     */
+    public void initializeOnEditProductControllerCall(FXMLEditProductController editProductController, ObservableList<MarcaBLL> brandList)
+    {
+        setListEditProductController(editProductController);
+        setObservableList(brandList);
+    }
+    
+    /**
+     * Sets list controller
+     * @param editProductController Controller to be set
+     */
+    private void setListEditProductController(FXMLEditProductController editProductController)
+    {
+        this.editProductController = editProductController;
     }
 
     /**
@@ -111,6 +133,10 @@ public class FXMLAddBrandController implements Initializable {
         else if(this.addProductController != null)
         {
             this.addProductController.brandComboBox.getSelectionModel().select(brandList.size()-1);
+        }
+        else if(this.editProductController != null)
+        {
+            this.editProductController.brandComboBox.getSelectionModel().select(brandList.size()-1);
         }
         
         closeStage(event);

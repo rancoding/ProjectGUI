@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 import projetoii.design.administrator.warehouse.data.category.list.FXMLListCategoryController;
 import projetoii.design.administrator.warehouse.data.product.add.FXMLAddProductController;
+import projetoii.design.administrator.warehouse.data.product.edit.FXMLEditProductController;
 import services.TipoProdutoService;
 
 public class FXMLAddCategoryController implements Initializable {
@@ -25,6 +26,7 @@ public class FXMLAddCategoryController implements Initializable {
     @FXML private Label errorLabel;
     
     private FXMLAddProductController addProductController;
+    private FXMLEditProductController editProductController;
     private FXMLListCategoryController listCategoryController;
     private ObservableList<TipoProdutoBLL> productTypeList;
     
@@ -50,6 +52,19 @@ public class FXMLAddCategoryController implements Initializable {
     {
         this.addProductController = addProductController;
     }
+    
+     public void initializeOnEditProductControllerCall(FXMLEditProductController editProductController, ObservableList<TipoProdutoBLL> typeList)
+    {
+        setListEditProductController(editProductController);
+        setObservableList(typeList);
+    }
+    
+    /* * Sets list controller * */
+    private void setListEditProductController(FXMLEditProductController editProductController)
+    {
+        this.editProductController = editProductController;
+    }
+    
     
     /* * Initializes all variables when getting called from another controller * */
     public void initializeOnControllerCall(FXMLListCategoryController listCategoryController, ObservableList<TipoProdutoBLL> productTypeList)
@@ -91,6 +106,10 @@ public class FXMLAddCategoryController implements Initializable {
         else if(this.addProductController != null)
         {
             this.addProductController.typeComboBox.getSelectionModel().select(productTypeList.size()-1);
+        }
+        else if(this.editProductController != null)
+        {
+            this.editProductController.typeComboBox.getSelectionModel().select(productTypeList.size()-1);
         }
         
         closeStage(event);

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 import projetoii.design.administrator.warehouse.data.color.list.FXMLListColorController;
 import projetoii.design.administrator.warehouse.data.product.add.FXMLAddProductController;
+import projetoii.design.administrator.warehouse.data.product.edit.FXMLEditProductController;
 import services.CorService;
 
 public class FXMLAddColorController implements Initializable {
@@ -25,6 +26,7 @@ public class FXMLAddColorController implements Initializable {
     @FXML private Label errorLabel;
     
     private FXMLAddProductController addProductController;
+    private FXMLEditProductController editProductController;
     private FXMLListColorController listColorController;
     private ObservableList<CorBLL> colorList;
     
@@ -45,6 +47,19 @@ public class FXMLAddColorController implements Initializable {
     private void setListAddProductController(FXMLAddProductController addProductController)
     {
         this.addProductController = addProductController;
+    }
+    
+    /* * Initializes all variables when getting called from another controller * */
+    public void initializeOnEditProductControllerCall(FXMLEditProductController editProductController, ObservableList<CorBLL> colorList)
+    {
+        setListEditProductController(editProductController);
+        setObservableList(colorList);
+    }
+    
+    /* * Sets list controller * */
+    private void setListEditProductController(FXMLEditProductController editProductController)
+    {
+        this.editProductController = editProductController;
     }
     
     
@@ -88,6 +103,10 @@ public class FXMLAddColorController implements Initializable {
         else if(this.addProductController != null)
         {
             this.addProductController.colorComboBox.getSelectionModel().select(colorList.size()-1);
+        }
+        else if(this.editProductController != null)
+        {
+            this.editProductController.colorComboBox.getSelectionModel().select(colorList.size()-1);
         }
         
         closeStage(event);

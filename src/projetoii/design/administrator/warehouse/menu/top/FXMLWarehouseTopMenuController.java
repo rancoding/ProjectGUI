@@ -5,6 +5,7 @@
  */
 package projetoii.design.administrator.warehouse.menu.top;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -77,6 +78,7 @@ public class FXMLWarehouseTopMenuController implements Initializable {
                 switchCenter(FXMLListBoxController.class, "FXMLListBox.fxml");
                 break;
             }
+                   
         }
     }
     
@@ -94,6 +96,7 @@ public class FXMLWarehouseTopMenuController implements Initializable {
         }
         catch(Exception e)
         {
+            e.printStackTrace();
         }
     }
     

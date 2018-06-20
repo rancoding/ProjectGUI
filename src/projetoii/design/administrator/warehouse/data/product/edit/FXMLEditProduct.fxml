@@ -22,7 +22,7 @@
       <Label layoutX="10.0" layoutY="187.0" prefWidth="100.0" text="Sexo" />
       <ComboBox fx:id="genderComboBox" layoutX="111.0" layoutY="183.0" prefWidth="150.0" promptText="Masculino" />
       <Label alignment="CENTER_RIGHT" layoutX="330.0" layoutY="117.0" prefWidth="100.0" text="Cor" />
-      <ComboBox fx:id="colorComboBox" layoutX="440.0" layoutY="113.0" prefWidth="150.0" promptText="Vermelho" />
+      <ComboBox fx:id="colorComboBox" layoutX="440.0" layoutY="113.0" prefWidth="110.0" promptText="Vermelho" />
       <Label alignment="CENTER_RIGHT" layoutX="330.0" layoutY="152.0" prefWidth="100.0" text="Preço de Compra" />
       <TextField fx:id="buyPriceText" alignment="CENTER_RIGHT" layoutX="440.0" layoutY="148.0" prefWidth="150.0" text="20€" />
       <Label alignment="CENTER_RIGHT" layoutX="330.0" layoutY="187.0" prefWidth="100.0" text="Preço de Venda" />
@@ -35,5 +35,9 @@
          </children>
       </Pane>
       <ComboBox layoutX="530.0" layoutY="10.0" prefWidth="60.0" promptText="PT" />
+      <Button layoutX="273.0" layoutY="78.0" mnemonicParsing="false" onAction="#changetoAddBrand" prefHeight="17.0" prefWidth="27.0" text="+" />
+      <Button layoutX="273.0" layoutY="113.0" mnemonicParsing="false" onAction="#changetoAddCategory" prefHeight="17.0" prefWidth="27.0" text="+" />
+      <Button layoutX="273.0" layoutY="148.0" mnemonicParsing="false" onAction="#changetoAddSize" prefHeight="17.0" prefWidth="27.0" text="+" />
+      <Button layoutX="560.0" layoutY="113.0" mnemonicParsing="false" onAction="#changetoAddColor" prefHeight="17.0" prefWidth="27.0" text="+" />
    </children>
 </AnchorPane>
